@@ -6,6 +6,7 @@
 #include<QMouseEvent>
 #include<QRect>
 #include<QList>
+#include"drawpages/drawsettinglight.h"
 
 class SettingLight : public QMainWindow
 {
@@ -25,6 +26,7 @@ private:
     QList<QRect> *rectlist;
     QRect rect;
     int targetwidgetindex;
+    DrawSettingLight *drawsettinglight;
 
 signals:
 

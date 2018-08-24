@@ -38,8 +38,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
 {
     this->setWindowFlags(Qt::FramelessWindowHint);
-    this->setFixedHeight(SCREEN_FIXED_HEIGHT);
-    this->setFixedWidth(SCREEN_FIXED_WIDTH);
+    this->setFixedHeight(GLOBAL_SCREEN_FIXED_HEIGHT);
+    this->setFixedWidth(GLOBAL_SCREEN_FIXED_WIDTH);
     init();
 }
 
@@ -52,6 +52,9 @@ MainWindow::~MainWindow()
 void MainWindow::init()
 {
     drawmainpage = new DrawMainPage;
+    pulldownwindow = new PullDownWindow(this);
+    statusbar = new StatusBar(this);
+
     initView();
     targetWidgetIndex =-1;
     initConnection();
@@ -172,11 +175,11 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
     targetWidgetIndex = commonUtils::getTheTargetWidget(event->x(),event->y(),rectlist);
     if(targetWidgetIndex>-1){
         rectflag[targetWidgetIndex] = 1;
-        this->repaint(rectlist->at(targetWidgetIndex));
+        this->repaint();
     }
 
-    for(int i=0;i<rectlist->size();i++){
-        qDebug()<<"rectflag[i]=="+QString::number(rectflag[i]);
+    if(event->y()<40){
+        pulldownwindow->show();
     }
 
 }
@@ -189,46 +192,45 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
 void MainWindow::mouseReleaseEvent(QMouseEvent *event)
 {
 
-    rectflag[targetWidgetIndex] = false;
-
-    for(int i=0;i<rectlist->size();i++){
-        qDebug()<<"rectflag[i]=="+QString::number(rectflag[i]);
+    rectflag[targetWidgetIndex] = 0;
+    if(targetWidgetIndex>-1){
+        switch (targetWidgetIndex) {
+        case 0:
+            break;
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+        case 5:
+            break;
+        case 6:
+            break;
+        case 7:
+            break;
+        default:
+            break;
+        }
+        targetWidgetIndex = -1;
+        this->repaint();
     }
-
-    switch (targetWidgetIndex) {
-    case 0:
-        break;
-    case 1:
-        break;
-    case 2:
-        break;
-    case 3:
-        break;
-    case 4:
-        break;
-    case 5:
-        break;
-    case 6:
-        break;
-    case 7:
-        break;
-    default:
-        break;
-    }
-
-    targetWidgetIndex = -1;
-    this->repaint();
 
 }
 
 void MainWindow::paintEvent(QPaintEvent *event)
 {
     QPainter *painter  = new QPainter(this);
+    statusbar->drawSystemTime(painter,QString("15:30"));
+    statusbar->drawWifiStatus(painter,true);
+    statusbar->drawPullDownRectangle(painter);
+    statusbar->drawBattery(painter,80);
 
     drawmainpage->drawCurrentBookAuthor(painter,"HELLO",rectlist->at(0));
 
     drawmainpage->drawTextView(painter,rectlist->at(6),rectflag[6]);
-
 
 }
 

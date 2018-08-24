@@ -7,6 +7,8 @@
 #include<QPainter>
 #include<QRect>
 #include<QList>
+#include"drawpages/drawsettingrestore.h"
+
 
 class SettingRestore : public QMainWindow
 {
@@ -25,6 +27,7 @@ private:
     void initView();
     QList<QRect> *rectlist;
     int targetwidgetindex;
+    DrawSettingRestore *drawsettingrestore;
 
 signals:
 

@@ -2,7 +2,7 @@
 #include"application.h"
 #include"utils/commonutils.h"
 
-int thirdapprect[5] = {0,0,0,0,0};
+int thirdapp_rect[5] = {0,0,0,0,0};
 
 ThirdApplications::ThirdApplications(QWidget *parent) : QMainWindow(parent)
 {
@@ -39,8 +39,8 @@ void ThirdApplications::paintEvent(QPaintEvent *event)
 
 void ThirdApplications::mousePressEvent(QMouseEvent *event)
 {
-targetwidgetindex = commonUtils::getTheTargetWidget(event->x(),event->y(),rectlist);
-this->repaint();
+    targetwidgetindex = commonUtils::getTheTargetWidget(event->x(),event->y(),rectlist);
+    this->repaint();
 }
 
 void ThirdApplications::mouseMoveEvent(QMouseEvent *event)
@@ -50,8 +50,24 @@ void ThirdApplications::mouseMoveEvent(QMouseEvent *event)
 
 void ThirdApplications::mouseReleaseEvent(QMouseEvent *event)
 {
-targetwidgetindex = -1;
-this->repaint();
+    thirdapp_rect[targetwidgetindex] =0;
+    if(targetwidgetindex>-1){
+        switch (targetwidgetindex) {
+        case 0:
+
+            break;
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        default:
+            break;
+        }
+        targetwidgetindex = -1;
+        this->repaint();
+    }
 }
 
 

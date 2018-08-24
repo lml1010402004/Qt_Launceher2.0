@@ -9,6 +9,9 @@
 #include<QRect>
 #include<QRect>
 #include"drawpages/drawmainpage.h"
+#include"modulepages/pulldownwindow.h"
+#include"statusbar.h"
+#include"statusbar_global.h"
 
 
 
@@ -27,13 +30,18 @@ public:
     void paintEvent(QPaintEvent *event);
 
 private:
+    DrawMainPage *drawmainpage;
+    PullDownWindow *pulldownwindow;
+    StatusBar *statusbar;
+
+private:
     void init();
     void initView();
     void initConnection();
 
     QRect rect;
     int targetWidgetIndex;
-    DrawMainPage *drawmainpage;
+
 
     QList<QRect> *rectlist;
 

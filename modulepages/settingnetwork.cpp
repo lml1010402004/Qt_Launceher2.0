@@ -26,8 +26,13 @@ void SettingNetWork::mouseMoveEvent(QMouseEvent *event)
 
 void SettingNetWork::mouseReleaseEvent(QMouseEvent *event)
 {
+    settingnet_rectflag[targetwidgetindex] = 0;
+    if(targetwidgetindex>-1){
+
+
     targetwidgetindex =-1;
     this->repaint();
+    }
 
 }
 
@@ -46,5 +51,6 @@ void SettingNetWork::init()
 void SettingNetWork::initView()
 {
   rectlist = new QList<QRect>;
+  drawsettingnetwork = new DrawSettingNetWork;
 
 }

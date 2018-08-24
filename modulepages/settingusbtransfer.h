@@ -7,6 +7,7 @@
 #include<QRect>
 #include<QList>
 #include<QPainter>
+#include"drawpages/drawsettingsusbtransfer.h"
 
 
 class SettingUSBTransfer : public QMainWindow
@@ -34,6 +35,7 @@ private:
 
    void init();
    void initView();
+   DrawSettingsUsbTransfer *drawsettingusbtransfer;
 
 
 signals:

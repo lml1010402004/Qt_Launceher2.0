@@ -5,14 +5,14 @@
 
 int position1[8] = {0,96,600,96,500,50,30,29};
 int position2[4] = {55,110,60,40};
-int bookshelf_rectflag[] = {};
+int bookshelf_rectflag[] = {0,0,0,0};
 
 BookShelf::BookShelf(QWidget *parent) : QMainWindow(parent)
 {
 
     this->setWindowFlags(Qt::Dialog|Qt::FramelessWindowHint);
-    this->setFixedHeight(SCREEN_FIXED_HEIGHT);
-    this->setFixedWidth(SCREEN_FIXED_WIDTH);
+    this->setFixedHeight(GLOBAL_SCREEN_FIXED_HEIGHT);
+    this->setFixedWidth(GLOBAL_SCREEN_FIXED_WIDTH);
     init();
 
 }
@@ -68,8 +68,26 @@ void BookShelf::mousePressEvent(QMouseEvent *event)
 void BookShelf::mouseReleaseEvent(QMouseEvent *event)
 {
 
+    bookshelf_rectflag[targetwidgetindex] =0;
+    if(targetwidgetindex>-1){
+        switch (targetwidgetindex) {
+        case 0:
+
+            break;
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+        default:
+            break;
+        }
     targetwidgetindex = -1;
     this->repaint();
+    }
 
 }
 

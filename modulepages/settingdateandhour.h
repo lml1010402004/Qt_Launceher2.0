@@ -28,6 +28,7 @@ private:
     QList<QRect> *rectlist;
     QRect rect;
     int targetwidgetindex;
+    DrawSettingDateAndTime *drawsettingdateandtime;
 
 signals:
 

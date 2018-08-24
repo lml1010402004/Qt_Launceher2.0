@@ -9,6 +9,7 @@
 #include"statusbar.h"
 #include"statusbar_global.h"
 #include<QList>
+#include"drawpages/drawsettingmodules.h"
 
 class Settings : public QMainWindow
 {
@@ -29,6 +30,7 @@ private:
     void initConnections();
     QList<QRect> *rectlist;
     int targetwidgetindex;
+    DrawSettingModules *drawsettingmodules;
 
 signals:
 

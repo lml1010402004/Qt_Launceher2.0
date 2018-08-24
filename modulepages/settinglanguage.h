@@ -8,6 +8,7 @@
 #include<QPainter>
 #include<QRect>
 #include<QList>
+#include"drawpages/drawsettinglanguage.h"
 
 class SettingLanguage : public QMainWindow
 {
@@ -27,6 +28,7 @@ private:
     void initView();
     QList<QRect> *rectlist;
     int targetwidgetindex;
+    DrawSettingLanguage *drawsettinglanguage;
 
 
 signals:

@@ -7,6 +7,7 @@
 #include<QMouseEvent>
 #include<QRect>
 #include<QList>
+#include"drawpages/drawsettingscreen.h"
 
 
 
@@ -30,6 +31,7 @@ private:
     QList<QRect> *rectlist;
     QRect rect;
     int targetwidgetindex;
+    DrawSettingScreen *drawsettingscreen;
 
 signals:
 

@@ -17,7 +17,9 @@ KeyBoardFilter *keyboardfilter;
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+//    QApplication::setScreenUpdateMode(QApplication::EINK_GC16_MODE);
     QApplication::setScreenUpdateMode(QApplication::EINK_GC16_LOCAL_MODE);
+//    QApplication::setScreenUpdateMode(QApplication::EINK_GL16_MODE);//这个模式不能用
 
     //设置支持汉字字体显示==开始===
     QFont font;
@@ -29,7 +31,7 @@ int main(int argc, char *argv[])
     //设置支持汉字显示==结束==
 
     //获取系统默认语言
-    SysSettings sys;
+ //   SysSettings sys;
 //    QString tempStr = sys.getLanguage();
 //    if(tempStr.contains(QString("Chinese"))){
 //        qtTranslator.load(":/mypic/cn.qm");
@@ -39,9 +41,9 @@ int main(int argc, char *argv[])
 
 //    QApplication::installTranslator(&qtTranslator);
 
-    PinyinIM   *pinyinIM = new PinyinIM();
+   // PinyinIM   *pinyinIM = new PinyinIM();
     //pinyinIM->connect(pinyinIM, SIGNAL(sigConfirmString(QString)), this, SLOT(pinyinIMConfirmStringS(QString)));
-    QWSServer::setCurrentInputMethod(pinyinIM);
+  //  QWSServer::setCurrentInputMethod(pinyinIM);
 
 
 //    keyboardfilter = new KeyBoardFilter;

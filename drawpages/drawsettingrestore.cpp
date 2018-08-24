@@ -30,7 +30,3 @@ void DrawSettingRestore::drawRestoreButtonandShutdownButton(QPainter *painter, Q
 
 }
 
-void DrawSettingRestore::init()
-{
-
-}

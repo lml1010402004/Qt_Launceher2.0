@@ -30,14 +30,14 @@ void ConnectWifiDialog::initView()
 
 void ConnectWifiDialog::paintEvent(QPaintEvent *event)
 {
-   QPainter *painter = new QPainter(this);
+    QPainter *painter = new QPainter(this);
 
 }
 
 void ConnectWifiDialog::mousePressEvent(QMouseEvent *event)
 {
-targetwidgetindex = commonUtils::getTheTargetWidget(event->x(),event->y(),rectlist);
-this->repaint();
+    targetwidgetindex = commonUtils::getTheTargetWidget(event->x(),event->y(),rectlist);
+    this->repaint();
 }
 
 void ConnectWifiDialog::mouseMoveEvent(QMouseEvent *event)
@@ -47,8 +47,24 @@ void ConnectWifiDialog::mouseMoveEvent(QMouseEvent *event)
 
 void ConnectWifiDialog::mouseReleaseEvent(QMouseEvent *event)
 {
-  targetwidgetindex = -1;
-  this->repaint();
+    connec_rectflag[targetwidgetindex] = 0;
+    if(targetwidgetindex>-1){
+        switch (targetwidgetindex) {
+        case 0:
+
+            break;
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        default:
+            break;
+        }
+        targetwidgetindex = -1;
+        this->repaint();
+    }
 }
 
 

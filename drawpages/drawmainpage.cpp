@@ -54,6 +54,7 @@ void DrawMainPage::drawTextView(QPainter *painter,QRect rect,int flag)
     }else{
     painter->drawPixmap(rect,homeunpressed);
     }
+
 }
 
 void DrawMainPage::drawThreeModulesBottom(QPainter *painter, int index, QRect rect)

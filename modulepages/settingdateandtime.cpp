@@ -32,8 +32,25 @@ void SettingDateAndTime::mouseMoveEvent(QMouseEvent *event)
 
 void SettingDateAndTime::mouseReleaseEvent(QMouseEvent *event)
 {
- targetwidgetindex = -1;
- this->repaint();
+
+    settingdate_rectflag[targetwidgetindex] = 0;
+    if(targetwidgetindex>-1){
+        switch (targetwidgetindex) {
+        case 0:
+            break;
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        default:
+            break;
+        }
+        targetwidgetindex = -1;
+        this->repaint();
+    }
+
 }
 
 void SettingDateAndTime::init()

@@ -14,7 +14,6 @@ public:
     void drawRestoreTitle(QPainter *painter,QRect rect);
     void drawRestoreButtonandShutdownButton(QPainter *painter,QRect resotrerect,QRect shutdownrect);
 
-    void init();
 
 private:
     QRect rect;

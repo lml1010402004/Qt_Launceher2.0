@@ -7,6 +7,7 @@
 #include<QRect>
 #include"drawpages/drawpulldownwindow.h"
 #include<QList>
+#include"application.h"
 
 class PullDownWindow : public QMainWindow
 {

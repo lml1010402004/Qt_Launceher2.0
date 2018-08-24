@@ -1,7 +1,7 @@
 #include "settingdateandhour.h"
 #include"utils/commonutils.h"
 
-int settingdateandhourrectflag[5] = {0,0,0,0,0};
+int settingdateandhour_rectflag[5] = {0,0,0,0,0};
 
 SettingDateandHour::SettingDateandHour(QWidget *parent) : QMainWindow(parent)
 {
@@ -22,13 +22,14 @@ void SettingDateandHour::init()
 
 void SettingDateandHour::initView()
 {
-  rectlist = new QList<QRect>;
+    rectlist = new QList<QRect>;
+    drawsettingdateandtime = new DrawSettingDateAndTime;
 }
 
 void SettingDateandHour::mousePressEvent(QMouseEvent *event)
 {
-targetwidgetindex = commonUtils::getTheTargetWidget(event->x(),event->y(),rectlist);
-this->repaint();
+    targetwidgetindex = commonUtils::getTheTargetWidget(event->x(),event->y(),rectlist);
+    this->repaint();
 }
 
 void SettingDateandHour::mouseMoveEvent(QMouseEvent *event)
@@ -38,8 +39,24 @@ void SettingDateandHour::mouseMoveEvent(QMouseEvent *event)
 
 void SettingDateandHour::mouseReleaseEvent(QMouseEvent *event)
 {
- targetwidgetindex = -1;
- this->repaint();
+    settingdateandhour_rectflag[targetwidgetindex] =0;
+    if(targetwidgetindex>-1){
+        switch (targetwidgetindex) {
+        case 0:
+
+            break;
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        default:
+            break;
+        }
+        targetwidgetindex = -1;
+        this->repaint();
+    }
 }
 
 void SettingDateandHour::paintEvent(QPaintEvent *event)

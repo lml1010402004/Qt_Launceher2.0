@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QList>
 #include <QRect>
+#include"drawpages/drawsettingnetwork.h"
 
 class SettingNetWork : public QMainWindow
 {
@@ -22,6 +23,7 @@ private:
     void initView();
     QList<QRect> *rectlist;
     int targetwidgetindex;
+    DrawSettingNetWork *drawsettingnetwork;
 
 signals:
 

@@ -18,6 +18,7 @@ void SettingLight::initView()
 {
 
    rectlist = new QList<QRect>;
+   drawsettinglight = new DrawSettingLight;
 
 }
 
@@ -43,7 +44,23 @@ void SettingLight::mouseMoveEvent(QMouseEvent *event)
 
 void SettingLight::mouseReleaseEvent(QMouseEvent *event)
 {
-    targetwidgetindex = -1;
-    this->repaint();
+    settinglight_rectflag[targetwidgetindex] =0;
+    if(targetwidgetindex>-1){
+        switch (targetwidgetindex) {
+        case 0:
+            break;
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        default:
+            break;
+        }
+        targetwidgetindex = -1;
+        this->repaint();
+    }
+
 
 }
