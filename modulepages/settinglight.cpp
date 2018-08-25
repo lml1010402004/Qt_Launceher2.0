@@ -1,5 +1,6 @@
 #include "settinglight.h"
 #include"utils/commonutils.h"
+#include"application.h"
 
 int settinglight_rectflag[5] = {0,0,0,0,0};
 

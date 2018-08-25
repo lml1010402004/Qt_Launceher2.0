@@ -1,6 +1,8 @@
 #include "bookshelf.h"
 #include"application.h"
 #include"utils/commonutils.h"
+#include<QApplication>
+
 
 
 int position1[8] = {0,96,600,96,500,50,30,29};
@@ -96,7 +98,38 @@ void BookShelf::mouseMoveEvent(QMouseEvent *event)
 
 }
 
-void BookShelf::getTheTargetBookIndex(int x_pos, int y_pos)
+int BookShelf::getTheTargetBookIndex(int x_pos, int y_pos)
 {
+   int temp = -1;
 
+   return temp;
+
+}
+
+int BookShelf::getTotalPagesForEachCondition(QList<localDirectoryItem> *list){
+
+    int temp =0;
+    qDebug()<<"list.size()=="<<list->size();
+    if(list->size()%9==0){
+        temp = list->size()/9;
+    }else{
+        temp = list->size()/9+1;
+    }
+
+    qDebug()<<"totalpages--temp=="<<temp;
+    return temp;
+}
+
+
+QList<localDirectoryItem>* BookShelf::getCurrentPageBooklist(QList<localDirectoryItem> *list, int currentpage){
+    QList<localDirectoryItem> *temp = new QList<localDirectoryItem>;
+    temp = commonUtils::getCurrentPageBooks(list,currentpage,9);
+    return temp;
+}
+
+void BookShelf::processFinisheds(){
+    QApplication::setScreenUpdateMode(QApplication::EINK_GC16_LOCAL_MODE);//刷新
+    this->repaint();
+    QApplication::setScreenUpdateMode(QApplication::EINK_GC16_LOCAL_MODE);//刷新
+    repaint();
 }

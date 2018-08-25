@@ -22,14 +22,18 @@ public:
     static int getStorageOfDevice();
     static QString GetLocalMac();
 
-    QList<localDirectoryItem>* getCurrentPageBooks(QList<localDirectoryItem> *list,int currentPage,int pagesize);
+    static  QList<localDirectoryItem>* getCurrentPageBooks(QList<localDirectoryItem> *list,int currentPage,int pagesize);
     void openBookFromFBreader(QProcess *process,QString bookpath);
 
     void drawProgressBarOpeningBook(QPainter *painter);
 
     int getTheBatteryPercentage();
 
- static int getTheTargetWidget(int pos_x,int pos_y,QList<QRect> *listrect);
+    static int getTheTargetWidget(int pos_x,int pos_y,QList<QRect> *listrect);
+
+    static void formattingDisk();
+
+
 
 
 

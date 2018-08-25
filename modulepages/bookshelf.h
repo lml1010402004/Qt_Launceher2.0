@@ -7,7 +7,9 @@
 #include<QRect>
 #include<QList>
 #include"drawpages/drawbookshelf.h"
-
+#include<dataItem/conditionitem.h>
+#include<database/database.h>
+#include"utils/commonutils.h"
 
 class BookShelf : public QMainWindow
 {
@@ -21,7 +23,9 @@ public:
     void mouseReleaseEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
 
-    void getTheTargetBookIndex(int x_pos,int y_pos);
+    int getTheTargetBookIndex(int x_pos,int y_pos);
+
+
 
 private:
 
@@ -34,6 +38,9 @@ private:
     void initView();
 
     void initConnection();
+    QList<localDirectoryItem>* getCurrentPageBooklist(QList<localDirectoryItem> *list,int currentpage);
+    int getTotalPagesForEachCondition(QList<localDirectoryItem> *list);
+    void processFinisheds();
 
 
 signals:

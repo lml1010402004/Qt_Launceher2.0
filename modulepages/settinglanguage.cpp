@@ -1,5 +1,6 @@
 #include "settinglanguage.h"
 #include"utils/commonutils.h"
+#include"application.h"
 
 int settinglanguage_rectflag[5] = {0,0,0,0,0};
 

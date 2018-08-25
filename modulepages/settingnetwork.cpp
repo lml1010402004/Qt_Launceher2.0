@@ -1,5 +1,6 @@
 #include "settingnetwork.h"
 #include"utils/commonutils.h"
+#include"application.h"
 
 int settingnet_rectflag[5] = {0,0,0,0,0};
 

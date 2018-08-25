@@ -210,5 +210,63 @@ int commonUtils::getTheTargetWidget(int pos_x, int pos_y, QList<QRect> *rectlist
     return targetwidgetindex;
 }
 
+void commonUtils::formattingDisk()
+{
+   system("umount /user");
+   sleep(1);
+   system("mkfs.vfat /dev/block/by-name/UDISK");
+   sleep(1);
+   system("reboot");
+}
+
+
+QList<localDirectoryItem>* getCurrentPageBooks(QList<localDirectoryItem> *list,int currentPage,int pagesize){
+  QList<localDirectoryItem> *templist = new QList<localDirectoryItem>;
+  int totalpages = 0;
+  if(list->size()%pagesize==0){
+      totalpages = list->size()/pagesize;
+  }else{
+      totalpages = list->size()/pagesize+1;
+  }
+
+  if(totalpages==0){
+
+  }else if(totalpages==1&&currentPage==1){
+
+      for(int i=0;i<list->size();i++){
+          templist->append(list->at(i));
+      }
+
+  }else if(totalpages>1&&currentPage==1){
+      for(int i=0;i<pagesize;i++){
+          templist->append(list->at(i));
+      }
+
+  }else if(totalpages>1&&currentPage<totalpages){
+      for(int i=0;i<pagesize;i++){
+          templist->append(list->at((currentPage-1)*pagesize+i));
+      }
+
+  }else if(totalpages>1&&currentPage==totalpages){
+
+      int temp = list->size()%pagesize;
+//          qDebug()<<"temp=="<<temp;
+        if(temp==0){
+            temp=9;
+        }
+      for(int i=0;i<temp;i++){
+          templist->append(list->at((totalpages-1)*pagesize+i));
+      }
+//        qDebug()<<"templist.size()=="<<templist->size();
+  }
+  return templist;
+
+
+
+}
+
+
+
+
 
 
