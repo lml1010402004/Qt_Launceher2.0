@@ -5,19 +5,24 @@ int settings_rectflag[5] = {0,0,0,0,0};
 
 Settings::Settings(QWidget *parent) : QMainWindow(parent)
 {
-
+    this->setWindowFlags(Qt::Dialog|Qt::FramelessWindowHint);
+    this->setFixedHeight(GLOBAL_SCREEN_FIXED_HEIGHT);
+    this->setFixedWidth(GLOBAL_SCREEN_FIXED_WIDTH);
     init();
 }
 
 Settings::~Settings()
 {
-
+  delete rectlist,drawsettingmodules;
+    rectlist = NULL;
+    drawsettingmodules =NULL;
 }
 
 void Settings::mousePressEvent(QMouseEvent *event)
 {
     targetwidgetindex = commonUtils::getTheTargetWidget(event->x(),event->y(),rectlist);
     this->repaint();
+    this->close();
 }
 
 void Settings::mouseMoveEvent(QMouseEvent *event)
@@ -52,7 +57,7 @@ void Settings::mouseReleaseEvent(QMouseEvent *event)
 
 void Settings::paintEvent(QPaintEvent *event)
 {
-    QPainter *painter = new QPainter(this);
+//    QPainter *painter = new QPainter(this);
 }
 
 void Settings::initView()
@@ -65,7 +70,6 @@ void Settings::initView()
 void Settings::init()
 {
     initView();
-
 }
 
 void Settings::initConnections()

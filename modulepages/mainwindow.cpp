@@ -4,20 +4,16 @@
 #include"utils/commonutils.h"
 #include<QBrush>
 
-const int mainpagecover[20] = {52,90,160,220,270,90,350,36,290,130,250,30,270,160,200,30,270,190,300,120};
-const int draw_main_page4[4] = {230,400,80,80};
-
-const int draw_main_page5[6] = {0,200,400,715,200,1};
-const int draw_main_page6[12] = {0,715,600,1,79,720,42,39,60,765,120,42};
-const int draw_main_page7[8] = {289,720,42,39,270,765,120,42};
-const int draw_main_page8[8] = {479,720,42,39,470,765,120,42};
-
-const int draw_main_page2[4] = {44,525,20,20};
-const int draw_main_page3[4] = {526,525,20,20};
+const int mainpage1[8] = {100,110,150,200,350,110,150,200};
+const int mainpage2[4] ={278,436,44,22};
+const int mainpage3[4] ={40,540,40,40};
+const int mainpage4[12] = {90,480,120,150,240,480,120,150,390,480,120,150};
+const int mainpage5[4] = {520,540,40,40};
+const int mainpage6[12] = {81,700,60,60,281,700,60,60,480,700,60,60};
 
 
 //assign the default value to rect.
-int rectflag[15] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+int rectflag[11] = {0,0,0,0,0,0,0,0,0,0,0};
 
 const QString homeiconpath = ":/mypic/pics/homeicon.png";
 
@@ -31,13 +27,19 @@ const QString bookcity = ":/mypic/pics/bookcity.png";
 const QString gamepath = ":/mypic/pics/game.png";
 
 
+
+
+
+
+
+
 const QString cover_group[3] = {":/mypic/pics/txt_cover.png",":/mypic/pics/pdf_cover.png",":/mypic/pics/epub_cover.png"};
 
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
 {
-    this->setWindowFlags(Qt::FramelessWindowHint);
+    this->setWindowFlags(Qt::Dialog|Qt::FramelessWindowHint);
     this->setFixedHeight(GLOBAL_SCREEN_FIXED_HEIGHT);
     this->setFixedWidth(GLOBAL_SCREEN_FIXED_WIDTH);
     init();
@@ -45,6 +47,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+    delete drawmainpage,pulldownwindow,statusbar,currentbookcoverrect,threebookrect;
+    drawmainpage = NULL;
+    pulldownwindow = NULL;
+    statusbar = NULL;
+    currentbookcoverrect = NULL;
+    threebookrect = NULL;
 
 }
 
@@ -53,7 +61,11 @@ void MainWindow::init()
 {
     drawmainpage = new DrawMainPage;
     pulldownwindow = new PullDownWindow(this);
+    settings = new Settings(this);
+
     statusbar = new StatusBar(this);
+    currentbookcoverrect = new QList<QRect>;
+    threebookrect = new QList<QRect>;
 
     initView();
     targetWidgetIndex =-1;
@@ -66,97 +78,72 @@ void MainWindow::initView()
 
     rectlist = new QList<QRect>;
 
-    rect.setX(mainpagecover[0]);
-    rect.setY(mainpagecover[1]);
-    rect.setWidth(mainpagecover[2]);
-    rect.setHeight(mainpagecover[3]);
-    rectlist->append(rect);
+    rect.setX(mainpage1[0]);
+    rect.setY(mainpage1[1]);
+    rect.setWidth(mainpage1[2]);
+    rect.setHeight(mainpage1[3]);
+    rectlist->append(rect);//left_cover  index=0
 
-    rect.setX(mainpagecover[0]+1);
-    rect.setY(mainpagecover[1]+1);
-    rect.setHeight(mainpagecover[3]-1);
-    rect.setWidth(mainpagecover[2]-1);
-    rectlist->append(rect);
+    rect.setX(mainpage1[4]);
+    rect.setY(mainpage1[5]);
+    rect.setWidth(mainpage1[6]);
+    rect.setHeight(mainpage1[7]);
+    rectlist->append(rect);//right_cover  index =1
 
-    rect.setX(mainpagecover[4]);
-    rect.setY(mainpagecover[5]);
-    rect.setWidth(mainpagecover[6]);
-    rect.setHeight(mainpagecover[7]);
-    rectlist->append(rect);
+    rect.setX(mainpage2[0]);
+    rect.setY(mainpage2[1]);
+    rect.setWidth(mainpage2[2]);
+    rect.setHeight(mainpage2[3]);
+    rectlist->append(rect);//New Books index =2
 
-    rect.setX(mainpagecover[4]);
-    rect.setY(mainpagecover[9]);
-    rect.setWidth(mainpagecover[10]);
-    rect.setHeight(mainpagecover[11]);
-    rectlist->append(rect);
+    rect.setX(mainpage3[0]);
+    rect.setY(mainpage3[1]);
+    rect.setWidth(mainpage3[2]);
+    rect.setHeight(mainpage3[3]);
+    rectlist->append(rect);  //Last Page index=3
 
-    rect.setX(mainpagecover[4]);
-    rect.setY(mainpagecover[17]);
-    rect.setWidth(mainpagecover[18]);
-    rect.setHeight(mainpagecover[19]);
-    rectlist->append(rect);
+    rect.setX(mainpage4[0]);
+    rect.setY(mainpage4[1]);
+    rect.setWidth(mainpage4[2]);
+    rect.setHeight(mainpage4[3]);
+    rectlist->append(rect);//first book in line index =4
 
-    rect.setX(mainpagecover[4]);
-    rect.setY(mainpagecover[2]);
-    rect.setWidth(mainpagecover[14]);
-    rect.setHeight(mainpagecover[15]);
-    rectlist->append(rect);
+    rect.setX(mainpage4[4]);
+    rect.setY(mainpage4[5]);
+    rect.setWidth(mainpage4[6]);
+    rect.setHeight(mainpage4[7]);
+    rectlist->append(rect);//second book in line index =5
 
-    rect.setX(draw_main_page4[0]+15);
-    rect.setY(draw_main_page4[1]);
-    rect.setWidth(draw_main_page4[2]);
-    rect.setHeight(draw_main_page4[3]);
-    rectlist->append(rect);
+    rect.setX(mainpage4[8]);
+    rect.setY(mainpage4[9]);
+    rect.setWidth(mainpage4[10]);
+    rect.setHeight(mainpage4[11]);
+    rectlist->append(rect);//third book in line index =6
 
-    rect.setX(draw_main_page6[4]);
-    rect.setY(draw_main_page6[5]);
-    rect.setWidth(draw_main_page6[6]);
-    rect.setHeight(draw_main_page6[7]);
-    rectlist->append(rect);
+    rect.setX(mainpage5[0]);
+    rect.setY(mainpage5[1]);
+    rect.setWidth(mainpage5[2]);
+    rect.setHeight(mainpage5[3]);
+    rectlist->append(rect);//next page index = 7
 
-    rect.setX(draw_main_page6[8]);
-    rect.setY(draw_main_page6[9]);
-    rect.setWidth(draw_main_page6[10]);
-    rect.setHeight(draw_main_page6[11]);
-    rectlist->append(rect);
+    rect.setX(mainpage6[0]);
+    rect.setY(mainpage6[1]);
+    rect.setWidth(mainpage6[2]);
+    rect.setHeight(mainpage6[3]);
+    rectlist->append(rect);//book shelf  index =8
 
-    rect.setX(draw_main_page7[0]);
-    rect.setY(draw_main_page7[1]);
-    rect.setWidth(draw_main_page7[2]);
-    rect.setHeight(draw_main_page7[3]);
-    rectlist->append(rect);
+    rect.setX(mainpage6[4]);
+    rect.setY(mainpage6[5]);
+    rect.setWidth(mainpage6[6]);
+    rect.setHeight(mainpage6[7]);
+    rectlist->append(rect);// applications index=9
 
-    rect.setX(draw_main_page7[4]);
-    rect.setY(draw_main_page7[5]);
-    rect.setWidth(draw_main_page7[6]);
-    rect.setHeight(draw_main_page7[7]);
+    rect.setX(mainpage6[8]);
+    rect.setY(mainpage6[9]);
+    rect.setWidth(mainpage6[10]);
+    rect.setHeight(mainpage6[11]);
+    rectlist->append(rect);//Setting index=10
 
-    rectlist->append(rect);
-
-    rect.setX(draw_main_page8[0]);
-    rect.setY(draw_main_page8[1]);
-    rect.setWidth(draw_main_page8[2]);
-    rect.setHeight(draw_main_page8[3]);
-
-    rectlist->append(rect);
-
-    rect.setX(draw_main_page8[4]);
-    rect.setY(draw_main_page8[5]);
-    rect.setWidth(draw_main_page8[6]);
-    rect.setHeight(draw_main_page8[7]);
-    rectlist->append(rect);
-
-    rect.setX(draw_main_page2[0]);
-    rect.setY(draw_main_page2[1]);
-    rect.setWidth(draw_main_page2[2]);
-    rect.setHeight(draw_main_page2[3]);
-    rectlist->append(rect);
-
-    rect.setX(draw_main_page3[0]+10);
-    rect.setY(draw_main_page3[1]);
-    rect.setWidth(draw_main_page3[2]);
-    rect.setHeight(draw_main_page3[3]);
-    rectlist->append(rect);
 
     //assign 0 to all widgets.
     for(int i=0;i<rectlist->size();i++){
@@ -173,14 +160,16 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
 {
 
     targetWidgetIndex = commonUtils::getTheTargetWidget(event->x(),event->y(),rectlist);
+
     if(targetWidgetIndex>-1){
         rectflag[targetWidgetIndex] = 1;
-        this->repaint();
+        this->repaint(rectlist->at(targetWidgetIndex));
     }
+//    if(event->y()<60){
+//        pulldownwindow->show();
+//    }
 
-    if(event->y()<40){
-        pulldownwindow->show();
-    }
+
 
 }
 
@@ -191,8 +180,11 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
 
 void MainWindow::mouseReleaseEvent(QMouseEvent *event)
 {
+    if(targetWidgetIndex>-1){
+        rectflag[targetWidgetIndex] = 0;
+    }
+    this->repaint();
 
-    rectflag[targetWidgetIndex] = 0;
     if(targetWidgetIndex>-1){
         switch (targetWidgetIndex) {
         case 0:
@@ -211,26 +203,68 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event)
             break;
         case 7:
             break;
+        case 8:
+            break;
+        case 9:
+            break;
+        case 10:
+            qDebug()<<"targetWidgetIndex==="<<targetWidgetIndex;
+            qDebug()<<"targetWidgetIndex==="<<targetWidgetIndex;
+            qDebug()<<"targetWidgetIndex==="<<targetWidgetIndex;
+            if(settings==NULL){
+                settings = new Settings(this);
+            }
+            settings->show();
+            break;
         default:
             break;
         }
+
         targetWidgetIndex = -1;
-        this->repaint();
     }
+
 
 }
 
 void MainWindow::paintEvent(QPaintEvent *event)
 {
-    QPainter *painter  = new QPainter(this);
+
+    QPainter *painter = new QPainter(this);
     statusbar->drawSystemTime(painter,QString("15:30"));
     statusbar->drawWifiStatus(painter,true);
     statusbar->drawPullDownRectangle(painter);
     statusbar->drawBattery(painter,80);
 
-    drawmainpage->drawCurrentBookAuthor(painter,"HELLO",rectlist->at(0));
+    //    QPainter *painter,QStringList bookCoverPath,QStringList booktitle,QList<QRect> rect)
+    currentbookcoverlist.append(cover_group[0]);
+    currentbookcoverlist.append(cover_group[1]);
+    currentbookcovertitle.append("");
+    currentbookcovertitle.append("");
+    currentbookcoverrect->append(rectlist->at(0));
+    currentbookcoverrect->append(rectlist->at(1));
+    drawmainpage->drawCurrentBookCover(painter,currentbookcoverlist,currentbookcovertitle,currentbookcoverrect);
+    drawmainpage->drawTextView(painter,rectlist->at(2),tr("NewB"));
+    drawmainpage->drawNextPage(painter,rectflag[7],rectlist->at(7));
 
-    drawmainpage->drawTextView(painter,rectlist->at(6),rectflag[6]);
+    drawmainpage->drawLastPage(painter,rectflag[3],rectlist->at(3));
+    threebookrect->clear();
+    threebookstringlist.clear();
+
+    threebookrect->append(rectlist->at(4));
+    threebookrect->append(rectlist->at(5));
+    threebookrect->append(rectlist->at(6));
+    threebookstringlist.append(cover_group[0]);
+    threebookstringlist.append(cover_group[1]);
+    threebookstringlist.append(cover_group[2]);
+    drawmainpage->drawThreeBooksArea(painter,threebookrect,threebookstringlist);
+
+    drawmainpage->drawThreeModulesBottom1(painter,rectflag[8],rectlist->at(8));
+    drawmainpage->drawThreeModulesBottom2(painter,rectflag[9],rectlist->at(9));
+    drawmainpage->drawThreeModulesBottom3(painter,rectflag[10],rectlist->at(10));
+
+
+
+
 
 }
 

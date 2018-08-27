@@ -12,6 +12,8 @@
 #include"modulepages/pulldownwindow.h"
 #include"statusbar.h"
 #include"statusbar_global.h"
+#include<QStringList>
+#include"modulepages/settings.h"
 
 
 
@@ -33,6 +35,15 @@ private:
     DrawMainPage *drawmainpage;
     PullDownWindow *pulldownwindow;
     StatusBar *statusbar;
+    Settings *settings;
+
+
+
+    QStringList currentbookcoverlist;
+    QStringList currentbookcovertitle;
+    QStringList threebookstringlist;
+    QList<QRect> *currentbookcoverrect;
+    QList<QRect> *threebookrect;
 
 private:
     void init();
