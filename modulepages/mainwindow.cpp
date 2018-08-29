@@ -5,11 +5,11 @@
 #include<QBrush>
 
 const int mainpage1[8] = {100,110,150,200,350,110,150,200};
-const int mainpage2[4] ={278,436,44,22};
+const int mainpage2[4] ={260,430,80,40};
 const int mainpage3[4] ={40,540,40,40};
-const int mainpage4[12] = {90,480,120,150,240,480,120,150,390,480,120,150};
+const int mainpage4[12] = {90,480,120,170,240,480,120,170,390,480,120,170};
 const int mainpage5[4] = {520,540,40,40};
-const int mainpage6[12] = {81,700,60,60,281,700,60,60,480,700,60,60};
+const int mainpage6[12] = {70,700,60,60,270,700,60,60,470,700,60,60};
 
 
 //assign the default value to rect.
@@ -26,11 +26,7 @@ const QString booklibray_path=":/mypic/pics/book_library.png";
 const QString bookcity = ":/mypic/pics/bookcity.png";
 const QString gamepath = ":/mypic/pics/game.png";
 
-
-
-
-
-
+QList<QMainWindow*> *mainwindowlist;
 
 
 const QString cover_group[3] = {":/mypic/pics/txt_cover.png",":/mypic/pics/pdf_cover.png",":/mypic/pics/epub_cover.png"};
@@ -39,6 +35,7 @@ const QString cover_group[3] = {":/mypic/pics/txt_cover.png",":/mypic/pics/pdf_c
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
 {
+    mainwindowlist = new QList<QMainWindow*>;
     this->setWindowFlags(Qt::Dialog|Qt::FramelessWindowHint);
     this->setFixedHeight(GLOBAL_SCREEN_FIXED_HEIGHT);
     this->setFixedWidth(GLOBAL_SCREEN_FIXED_WIDTH);
@@ -59,6 +56,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::init()
 {
+    getBookDataFromDataBase();
     drawmainpage = new DrawMainPage;
     pulldownwindow = new PullDownWindow(this);
     settings = new Settings(this);
@@ -66,9 +64,13 @@ void MainWindow::init()
     statusbar = new StatusBar(this);
     currentbookcoverrect = new QList<QRect>;
     threebookrect = new QList<QRect>;
+    totaltemp = new QList<localDirectoryItem>;
+    currentPagebooklist = new QList<localDirectoryItem>;
 
     initView();
     targetWidgetIndex =-1;
+    unable_last =0;
+    unable_next =0;
     initConnection();
 }
 
@@ -183,7 +185,7 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event)
     if(targetWidgetIndex>-1){
         rectflag[targetWidgetIndex] = 0;
     }
-    this->repaint();
+
 
     if(targetWidgetIndex>-1){
         switch (targetWidgetIndex) {
@@ -194,6 +196,17 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event)
         case 2:
             break;
         case 3:
+            if(currentPageOfMainPage>1){
+                unable_next = 0;
+                unable_last = 0;
+                currentPageOfMainPage--;
+                currentPagebooklist = commonUtils::getCurrentPageBooks(totaltemp,currentPageOfMainPage,3);
+
+            }else{
+                unable_next = 0;
+                unable_last =1;
+
+            }
             break;
         case 4:
             break;
@@ -202,15 +215,23 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event)
         case 6:
             break;
         case 7:
+            if(currentPageOfMainPage<totalPagesOfBooks-1){
+                unable_last = 0;
+                unable_next = 0;
+                currentPageOfMainPage++;
+                currentPagebooklist = commonUtils::getCurrentPageBooks(totaltemp,currentPageOfMainPage,3);
+            }else{
+                unable_next = 1;
+                unable_last =0;
+
+            }
+
             break;
         case 8:
             break;
         case 9:
             break;
         case 10:
-            qDebug()<<"targetWidgetIndex==="<<targetWidgetIndex;
-            qDebug()<<"targetWidgetIndex==="<<targetWidgetIndex;
-            qDebug()<<"targetWidgetIndex==="<<targetWidgetIndex;
             if(settings==NULL){
                 settings = new Settings(this);
             }
@@ -221,7 +242,9 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event)
         }
 
         targetWidgetIndex = -1;
+        this->repaint();
     }
+
 
 
 }
@@ -270,6 +293,25 @@ void MainWindow::paintEvent(QPaintEvent *event)
 
 void MainWindow::initConnection()
 {
+
+
+}
+
+void MainWindow::getBookDataFromDataBase()
+{
+    Database* tempdatabase = Database::getInstance();
+    totaltemp =  tempdatabase->getLastTimeTableFromDatabase();
+    int size = totaltemp->size();
+
+    if(size>0){
+        if(size%3==0){
+            totalPagesOfBooks = size/3;
+        }else{
+            totalPagesOfBooks = size/3+1;
+        }
+        currentPageOfMainPage =1;
+        currentPagebooklist = commonUtils::getCurrentPageBooks(totaltemp,currentPageOfMainPage,3);
+    }
 
 
 }

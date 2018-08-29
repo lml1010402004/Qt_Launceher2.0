@@ -31,6 +31,7 @@ private:
     QList<QRect> *rectlist;
     int targetwidgetindex;
     DrawSettingModules *drawsettingmodules;
+    StatusBar *statusbar;
 
 signals:
 

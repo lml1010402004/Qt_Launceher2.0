@@ -5,12 +5,15 @@
 #include<QString>
 #include<QStringList>
 #include<QList>
+#include<QFont>
 
 class DrawMainPage
 {
 public:
     DrawMainPage();
     ~DrawMainPage();
+
+    QFont font;
 
 
     void drawCurrentBookCover(QPainter *painter,QStringList bookCoverPath,QStringList booktitle,QList<QRect> *rect);

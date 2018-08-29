@@ -13,7 +13,7 @@ Settings::Settings(QWidget *parent) : QMainWindow(parent)
 
 Settings::~Settings()
 {
-  delete rectlist,drawsettingmodules;
+    delete rectlist,drawsettingmodules;
     rectlist = NULL;
     drawsettingmodules =NULL;
 }
@@ -57,7 +57,10 @@ void Settings::mouseReleaseEvent(QMouseEvent *event)
 
 void Settings::paintEvent(QPaintEvent *event)
 {
-//    QPainter *painter = new QPainter(this);
+        QPainter *painter = new QPainter(this);
+        statusbar->drawBattery(painter,30);
+        statusbar->drawPullDownRectangle(painter);
+        statusbar->drawWifiStatus(painter,true);
 }
 
 void Settings::initView()
@@ -69,6 +72,7 @@ void Settings::initView()
 
 void Settings::init()
 {
+    statusbar = new StatusBar(this);
     initView();
 }
 

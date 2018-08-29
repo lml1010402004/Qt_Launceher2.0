@@ -2,9 +2,14 @@
 #include"utils/commonutils.h"
 
 int search_rectflag[5] = {0,0,0,0,0};
+extern QList<QMainWindow*> *mainwindowlist;
 
 SearchResultOfBook::SearchResultOfBook(QWidget *parent) : QMainWindow(parent)
 {
+    mainwindowlist->append(this);
+    this->setWindowFlags(Qt::Dialog|Qt::FramelessWindowHint);
+    this->setFixedHeight(GLOBAL_SCREEN_FIXED_HEIGHT);
+    this->setFixedWidth(GLOBAL_SCREEN_FIXED_WIDTH);
     init();
 }
 
@@ -43,7 +48,6 @@ void SearchResultOfBook::mouseReleaseEvent(QMouseEvent *event)
     if(targetwidgetindex>-1){
         switch (targetwidgetindex) {
         case 0:
-
             break;
         case 1:
             break;

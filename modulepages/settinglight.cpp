@@ -6,7 +6,6 @@ int settinglight_rectflag[5] = {0,0,0,0,0};
 
 SettingLight::SettingLight(QWidget *parent) : QMainWindow(parent)
 {
-
     init();
 }
 

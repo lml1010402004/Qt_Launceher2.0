@@ -11,7 +11,7 @@
 class ConfirmDialog:public QDialog
 {
 public:
-    ConfirmDialog();
+    ConfirmDialog(QWidget *parent=0);
     ~ConfirmDialog();
 
     void paintEvent(QPaintEvent *event);

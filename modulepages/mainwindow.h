@@ -14,6 +14,7 @@
 #include"statusbar_global.h"
 #include<QStringList>
 #include"modulepages/settings.h"
+#include"database/database.h"
 
 
 
@@ -44,14 +45,23 @@ private:
     QStringList threebookstringlist;
     QList<QRect> *currentbookcoverrect;
     QList<QRect> *threebookrect;
+    QList<localDirectoryItem> *totaltemp;
+    int currentPageOfMainPage ;
+    int unable_next;
+    int unable_last;
 
 private:
     void init();
     void initView();
     void initConnection();
 
+    void getBookDataFromDataBase();
+
     QRect rect;
     int targetWidgetIndex;
+    int totalPagesOfBooks;
+    QList<localDirectoryItem>  *currentPagebooklist;
+
 
 
     QList<QRect> *rectlist;

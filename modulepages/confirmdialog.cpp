@@ -3,9 +3,9 @@
 
 int comfirm_rectflag[4]={0,0,0,0};
 
-ConfirmDialog::ConfirmDialog()
+ConfirmDialog::ConfirmDialog(QWidget *parent):QDialog(parent)
 {
-
+    this->setWindowFlags(Qt::Dialog|Qt::FramelessWindowHint);
 
 }
 

@@ -3,9 +3,10 @@
 
 int connec_rectflag[5] = {0,0,0,0,0};
 
-ConnectWifiDialog::ConnectWifiDialog()
+
+ConnectWifiDialog::ConnectWifiDialog(QWidget *parent):QDialog(parent)
 {
-    init();
+
 }
 
 ConnectWifiDialog::~ConnectWifiDialog()

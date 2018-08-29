@@ -9,8 +9,9 @@
 
 class ConnectWifiDialog:public QDialog
 {
+    Q_OBJECT
 public:
-    ConnectWifiDialog();
+    ConnectWifiDialog(QWidget *parent=0);
     ~ConnectWifiDialog();
 
 
@@ -27,6 +28,11 @@ private:
     void initView();
     int targetwidgetindex;
     DrawConnectWifiDialog *drawconnectwifidialog;
+
+signals:
+
+public slots:
+
 
 
 };

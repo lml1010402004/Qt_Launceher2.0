@@ -33,14 +33,22 @@ DrawMainPage::~DrawMainPage()
 
 void DrawMainPage::drawCurrentBookCover(QPainter *painter,QStringList bookCoverPath,QStringList booktitle,QList<QRect> *rect)
 {
-
-    painter->drawRect(rect->at(0));
+    QRect temprect;
+    temprect.setX(rect->at(0).x()-1);
+    temprect.setY(rect->at(0).y()-1);
+    temprect.setWidth(rect->at(0).width()+1);
+    temprect.setHeight(rect->at(0).height()+1);
+    painter->drawRect(temprect);
     painter->drawPixmap(rect->at(0),bookCoverPath.at(0));
     if(booktitle.at(0).length()>0){
 
     }
 
-    painter->drawRect(rect->at(1));
+    temprect.setX(rect->at(1).x()-1);
+    temprect.setY(rect->at(1).y()-1);
+    temprect.setWidth(rect->at(1).width()+1);
+    temprect.setHeight(rect->at(1).height()+1);
+    painter->drawRect(temprect);
     painter->drawPixmap(rect->at(1),bookCoverPath.at(1));
     if(booktitle.at(1).length()>0){
 
@@ -85,25 +93,26 @@ void DrawMainPage::drawNextPage(QPainter *painter, int index, QRect rect)
 
 void DrawMainPage::drawTextView(QPainter *painter,QRect rect,QString title)
 {
-
+    font.setPixelSize(22);
+    painter->setFont(font);
     painter->drawText(rect,title);
 
 }
 
 void DrawMainPage::drawThreeModulesBottom1(QPainter *painter, int index, QRect rect)
 {
-   if(index==1){
+    if(index==1){
         painter->drawPixmap(rect,bookshelf_pressed);
-   }else{
-       painter->drawPixmap(rect,bookshelf);
-   }
+    }else{
+        painter->drawPixmap(rect,bookshelf);
+    }
 
 }
 
 void DrawMainPage::drawThreeModulesBottom2(QPainter *painter, int index, QRect rect)
 {
     if(index==1){
-         painter->drawPixmap(rect,application_pressed);
+        painter->drawPixmap(rect,application_pressed);
     }else{
         painter->drawPixmap(rect,application);
     }
@@ -113,7 +122,7 @@ void DrawMainPage::drawThreeModulesBottom2(QPainter *painter, int index, QRect r
 void DrawMainPage::drawThreeModulesBottom3(QPainter *painter, int index, QRect rect)
 {
     if(index==1){
-         painter->drawPixmap(rect,setting_pressed);
+        painter->drawPixmap(rect,setting_pressed);
     }else{
         painter->drawPixmap(rect,setting);
     }
@@ -122,8 +131,13 @@ void DrawMainPage::drawThreeModulesBottom3(QPainter *painter, int index, QRect r
 
 void DrawMainPage::drawThreeBooksArea(QPainter *painter, QList<QRect> *rectlist, QStringList bookcoverlist)
 {
+    QRect rect;
     for(int i=0;i<rectlist->size();i++){
-        painter->drawRect(rectlist->at(i));
+        rect.setX(rectlist->at(i).x()-1);
+        rect.setY(rectlist->at(i).y()-1);
+        rect.setWidth(rectlist->at(i).width()+1);
+        rect.setHeight(rectlist->at(i).height()+1);
+        painter->drawRect(rect);
         painter->drawPixmap(rectlist->at(i),bookcoverlist.at(i));
     }
 

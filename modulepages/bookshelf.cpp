@@ -5,9 +5,9 @@
 
 
 
-int position1[8] = {0,96,600,96,500,50,30,29};
-int position2[4] = {55,110,60,40};
-int bookshelf_rectflag[] = {0,0,0,0};
+int position1[4] = {500,48,50,50};
+int bookshelf_rectflag[5] = {0,0,0,0,0};
+
 
 BookShelf::BookShelf(QWidget *parent) : QMainWindow(parent)
 {
@@ -32,18 +32,21 @@ void BookShelf::init(){
 }
 
 void BookShelf::initView(){
-    rectlist->clear();
-    rect.setX(position1[4]);
-    rect.setY(position1[5]);
-    rect.setWidth(position1[6]);
-    rect.setHeight(position1[7]);
+
+    //here we should get the 9 widgets position as follows.
+    rectlist = new QList<QRect>;
+    rect.setX(position1[0]);
+    rect.setY(position1[1]);
+    rect.setWidth(position1[2]);
+    rect.setHeight(position1[3]);
     rectlist->append(rect);//Home Button
 
-    rect.setX(position2[0]);
-    rect.setY(position2[1]);
-    rect.setWidth(position2[2]);
-    rect.setHeight(position2[3]);
-    rectlist->append(rect);//ArrageTextView
+
+
+
+
+
+
 
 
 

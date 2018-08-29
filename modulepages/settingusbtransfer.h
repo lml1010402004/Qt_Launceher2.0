@@ -8,6 +8,10 @@
 #include<QList>
 #include<QPainter>
 #include"drawpages/drawsettingsusbtransfer.h"
+#include"statusbar.h"
+#include"statusbar_global.h"
+#include"syssettings.h"
+
 
 
 class SettingUSBTransfer : public QMainWindow
@@ -25,22 +29,27 @@ public:
 
 
 
-
-
 private:
     QList<QRect> *rectlist;
     QRect rect;
+    StatusBar *statubar;
     int targetwidgetindex;
+    SysSettings *mysyssetting;
 
 
    void init();
+   void initConnections();
    void initView();
    DrawSettingsUsbTransfer *drawsettingusbtransfer;
 
 
 signals:
+   void backToHomePageSignal();
 
 public slots:
+   void clickHomeButtonSlot();
+
+
 };
 
 #endif // SETTINGUSBTRANSFER_H

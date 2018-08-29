@@ -32,6 +32,8 @@ public:
     static int getTheTargetWidget(int pos_x,int pos_y,QList<QRect> *listrect);
 
     static void formattingDisk();
+    static void backToHomePageSlot();
+    static int returnLightValue(int progress);
 
 
 
@@ -41,6 +43,8 @@ public:
 private:
 
     QStringList arguments;
+
+
 
 };
 

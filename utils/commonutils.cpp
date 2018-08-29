@@ -25,7 +25,7 @@ const QString FBReader_WORK_DIRECTORY = "/usr/local/FBReader";
 
 const QString Loading_path = ":/mypic/pics/loading.png";
 
-
+extern QList<QMainWindow*> *mainwindowlist;
 
 commonUtils::commonUtils()
 {
@@ -217,6 +217,29 @@ void commonUtils::formattingDisk()
    system("mkfs.vfat /dev/block/by-name/UDISK");
    sleep(1);
    system("reboot");
+}
+
+void commonUtils::backToHomePageSlot()
+{
+    int size = mainwindowlist->size();
+    if(size>0){
+        for(int i=0;i<size;i++){
+            if(mainwindowlist->at(i)!=NULL){
+                mainwindowlist->at(i)->close();
+            }
+        }
+    }
+
+}
+
+int commonUtils::returnLightValue(int progress)
+{
+    //the start x point = 200
+        int tempValue = (progress-200)/8;
+        if((progress-200)%8!=0){
+            tempValue++;
+        }
+        return tempValue;
 }
 
 
