@@ -31,8 +31,9 @@ void SettingAboutTablet::mouseMoveEvent(QMouseEvent *event)
 
 void SettingAboutTablet::mouseReleaseEvent(QMouseEvent *event)
 {
-    settingabout_rectflag[targetwidgetindex] = 0;
     if(targetwidgetindex>-1){
+        settingabout_rectflag[targetwidgetindex] = 0;
+
         switch (targetwidgetindex) {
         case 0:
 

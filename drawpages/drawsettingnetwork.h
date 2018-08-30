@@ -12,9 +12,9 @@ public:
     DrawSettingNetWork();
     ~DrawSettingNetWork();
 
-    void drawHomeIcon(QPainter *painter,QRect rect);
-    void drawBackIcon(QPainter *painter,QRect rect);
-    void drawWifiTitle(QPainter *painter,QRect rect);
+    void drawHomeIcon(QPainter *painter,QRect rect,QString iconpath);
+    void drawBackIcon(QPainter *painter,QRect rect,QString iconpath);
+    void drawWifiTitle(QPainter *painter,QRect rect,QString title);
 
     void drawWifiSwitch(QPainter *painter,bool flag,QRect rect);
     void drawWifiSearchText(QPainter *painter,QRect rect);

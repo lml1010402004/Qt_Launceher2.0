@@ -10,10 +10,10 @@ public:
     DrawSearchResultOfBooks();
     ~DrawSearchResultOfBooks();
 
-    void drawHomeIcon(QPainter *painter,QRect rect);
-    void drawSearchButton(QPainter *painter,QRect rect);
+    void drawHomeIcon(QPainter *painter,QRect rect,QString iconpath);
+    void drawSearchButton(QPainter *painter,QRect rect,QString buttoncontent);
     void drawSearchOutBooks(QPainter *painter,QList<localDirectoryItem> *list);
-    void drawBackIcon(QPainter *painter);
+    void drawBackIcon(QPainter *painter,QRect rect,QString backpath);
 
 private:
     QRect rect;

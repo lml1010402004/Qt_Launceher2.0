@@ -9,11 +9,12 @@ public:
     DrawSettingLight();
     ~DrawSettingLight();
 
-    void drawHomeButton(QPainter *painter,QRect rect);
-    void drawProgressBar(QPainter *painter,QRect rect);
+    void drawHomeButton(QPainter *painter,QRect rect,int pressedflag,QString iconpath);
+    void drawProgressBar(QPainter *painter,QRect rect,QString iconlightpath,QString floatpath,QRect floatrect,int lightvalue);
 
     void drawLightTitle(QPainter *painter,QString title,QRect rect);
-    void drawBackIcon(QPainter *painter,QRect rect);
+    void drawBackIcon(QPainter *painter,QRect rect,QString path);
+
 
 private:
     QRect rect;

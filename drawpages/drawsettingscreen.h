@@ -9,8 +9,8 @@ public:
     DrawSettingScreen();
     ~DrawSettingScreen();
 
-    void drawHomeIcon(QPainter *painter,QRect rect);
-    void drawBackIcon(QPainter *painter,QRect rect);
+    void drawHomeIcon(QPainter *painter,QRect rect,QString iconpath);
+    void drawBackIcon(QPainter *painter,QRect rect,QString iconpath);
     void drawWallPageItem(QPainter *painter ,int index);
 
 };

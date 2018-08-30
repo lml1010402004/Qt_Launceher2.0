@@ -8,6 +8,8 @@
 #include<QRect>
 #include<QList>
 #include"drawpages/drawsettingscreen.h"
+#include"statusbar.h"
+#include"statusbar_global.h"
 
 
 
@@ -32,6 +34,7 @@ private:
     QRect rect;
     int targetwidgetindex;
     DrawSettingScreen *drawsettingscreen;
+    StatusBar *statusbar;
 
 signals:
 

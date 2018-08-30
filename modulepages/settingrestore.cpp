@@ -26,9 +26,9 @@ void SettingRestore::mouseMoveEvent(QMouseEvent *event)
 
 void SettingRestore::mouseReleaseEvent(QMouseEvent *event)
 {
-
+ if(targetwidgetindex>-1){
     settrestore_rectflag[targetwidgetindex] = 0;
-    if(targetwidgetindex>-1){
+
         switch (targetwidgetindex) {
         case 0:
 
@@ -50,6 +50,8 @@ void SettingRestore::mouseReleaseEvent(QMouseEvent *event)
 void SettingRestore::paintEvent(QPaintEvent *event)
 {
     QPainter *painter = new QPainter;
+    statusbar->drawPullDownRectangle(painter);
+
 
 }
 
@@ -62,6 +64,7 @@ void SettingRestore::init()
 void SettingRestore::initView()
 {
     rectlist = new QList<QRect>;
+    statusbar = new StatusBar(this);
     drawsettingrestore = new DrawSettingRestore;
 
 

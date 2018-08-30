@@ -2,6 +2,8 @@
 #define DRAWSETTINGMODULES_H
 #include<QRect>
 #include<QPainter>
+#include"dataItem/systemitems.h"
+#include<QFont>
 
 class DrawSettingModules
 {
@@ -9,10 +11,10 @@ public:
     DrawSettingModules();
     ~DrawSettingModules();
 
-    void drawHomeIcon(QPainter *painter ,QRect rect);
+    void drawHomeIcon(QPainter *painter ,QRect rect,QString iconpath);
     void drawSystemSettingText(QPainter *painter,QString text,QRect rect);
 
-    void drawSettingItems(QPainter *painter);
+    void drawSettingItems(QPainter *painter,QList<SystemItems*> *itemlist);
 
 
 
@@ -20,6 +22,7 @@ private:
     QRect rect;
     void init();
     void initView();
+    QFont font;
 
 };
 

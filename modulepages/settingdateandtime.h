@@ -5,6 +5,9 @@
 #include<QPaintEvent>
 #include<QPainter>
 #include<QPainter>
+#include"statusbar.h"
+#include"statusbar_global.h"
+#include"drawpages/drawsettingdateandtime.h"
 
 
 class SettingDateAndTime : public QMainWindow
@@ -27,6 +30,9 @@ private:
     int targetwidgetindex;
     QRect rect;
     QList<QRect> *rectlist;
+    StatusBar *statusbar;
+    DrawSettingDateAndTime *drawsettingdateandtime;
+
 
 signals:
 

@@ -12,9 +12,9 @@ public:
     DrawSettingDateAndTime();
     ~DrawSettingDateAndTime();
 
-    void drawHomeIcon(QPainter *painter,QRect rect);
-    void drawBackIcon(QPainter *painter,QRect rect);
-    void drawDateandTimeTitle(QPainter *painter,QRect rect);
+    void drawHomeIcon(QPainter *painter,QRect rect,QString iconpath);
+    void drawBackIcon(QPainter *painter,QRect rect,QString iconpath);
+    void drawDateandTimeTitle(QPainter *painter,QRect rect,QString title);
     void drawDateandTimeItems(QPainter *painter,dateModel *date,QRect daterect,QRect timerect);
 
     void init();

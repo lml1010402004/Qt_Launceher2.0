@@ -14,10 +14,10 @@ public:
     DrawSettingAboutTablet();
     ~DrawSettingAboutTablet();
 
-    void drawHomeIcon(QPainter *painter,QRect rect);
-    void drawBackIcon(QPainter *painter,QRect rect);
+    void drawHomeIcon(QPainter *painter,QRect rect,QString iconpath);
+    void drawBackIcon(QPainter *painter,QRect rect,QString iconpath);
 
-    void drawAboutTableTitle(QPainter *painter,QRect rect);
+    void drawAboutTableTitle(QPainter *painter,QRect rect,QString title);
     void drawInfoAboutTablet(QPainter *painter,QString SN,QString MAC,QString storage,QString VersionInfo,QList<QRect> *listrect);
 
     void init();

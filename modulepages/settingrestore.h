@@ -8,6 +8,8 @@
 #include<QRect>
 #include<QList>
 #include"drawpages/drawsettingrestore.h"
+#include"statusbar.h"
+#include"statusbar_global.h"
 
 
 class SettingRestore : public QMainWindow
@@ -28,6 +30,7 @@ private:
     QList<QRect> *rectlist;
     int targetwidgetindex;
     DrawSettingRestore *drawsettingrestore;
+    StatusBar *statusbar;
 
 signals:
 

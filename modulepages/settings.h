@@ -23,6 +23,7 @@ public:
     void mouseReleaseEvent(QMouseEvent *event);
 
     void paintEvent(QPaintEvent *event);
+    void drawSettingsItems(QPainter *painter);
 
 private:
     void initView();

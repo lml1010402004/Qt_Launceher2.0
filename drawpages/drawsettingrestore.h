@@ -9,9 +9,9 @@ public:
     DrawSettingRestore();
     ~DrawSettingRestore();
 
-    void drawHomeIcon(QPainter *painter,QRect rect);
-    void drawBackIcon(QPainter *painter,QRect rect);
-    void drawRestoreTitle(QPainter *painter,QRect rect);
+    void drawHomeIcon(QPainter *painter,QRect rect,QString iconpath);
+    void drawBackIcon(QPainter *painter,QRect rect,QString iconpath);
+    void drawRestoreTitle(QPainter *painter,QRect rect,QString title);
     void drawRestoreButtonandShutdownButton(QPainter *painter,QRect resotrerect,QRect shutdownrect);
 
 

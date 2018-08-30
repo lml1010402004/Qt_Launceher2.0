@@ -5,6 +5,8 @@
 #include <QList>
 #include <QRect>
 #include"drawpages/drawsettingnetwork.h"
+#include"statusbar.h"
+#include"statusbar_global.h"
 
 class SettingNetWork : public QMainWindow
 {
@@ -22,8 +24,10 @@ private:
     void init();
     void initView();
     QList<QRect> *rectlist;
+    QRect rect;
     int targetwidgetindex;
     DrawSettingNetWork *drawsettingnetwork;
+    StatusBar *statusbar;
 
 signals:
 

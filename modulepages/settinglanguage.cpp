@@ -27,8 +27,9 @@ void SettingLanguage::mouseMoveEvent(QMouseEvent *event)
 
 void SettingLanguage::mouseReleaseEvent(QMouseEvent *event)
 {
+     if(targetwidgetindex>-1){
     settinglanguage_rectflag[targetwidgetindex] =0;
-    if(targetwidgetindex>-1){
+
         switch (targetwidgetindex) {
         case 0:
 

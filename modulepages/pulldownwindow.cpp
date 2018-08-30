@@ -72,3 +72,6 @@ void PullDownWindow::paintEvent(QPaintEvent *event)
 
 }
 
+
+
+

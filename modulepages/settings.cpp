@@ -3,6 +3,8 @@
 
 int settings_rectflag[5] = {0,0,0,0,0};
 
+
+
 Settings::Settings(QWidget *parent) : QMainWindow(parent)
 {
     this->setWindowFlags(Qt::Dialog|Qt::FramelessWindowHint);
@@ -57,11 +59,26 @@ void Settings::mouseReleaseEvent(QMouseEvent *event)
 
 void Settings::paintEvent(QPaintEvent *event)
 {
-        QPainter *painter = new QPainter(this);
-        statusbar->drawBattery(painter,30);
-        statusbar->drawPullDownRectangle(painter);
-        statusbar->drawWifiStatus(painter,true);
+    QPainter *painter = new QPainter(this);
+    statusbar->drawBattery(painter,30);
+    statusbar->drawPullDownRectangle(painter);
+    statusbar->drawWifiStatus(painter,true);
 }
+
+/**
+ * @brief Settings::drawSettingsItems
+ * @param painter
+ * @param rectlist
+ * @param titlelist
+ * @param pathlist
+ */
+void Settings::drawSettingsItems(QPainter *painter)
+{
+
+
+
+}
+
 
 void Settings::initView()
 {

@@ -7,6 +7,8 @@
 #include<QRect>
 #include<QList>
 #include"drawpages/drawsettinglight.h"
+#include"statusbar.h"
+#include"statusbar_global.h"
 
 class SettingLight : public QMainWindow
 {
@@ -18,6 +20,7 @@ public:
     void mousePressEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *event);
+    void paintEvent(QPaintEvent *event);
 
 private:
     void init();
@@ -27,6 +30,7 @@ private:
     QRect rect;
     int targetwidgetindex;
     DrawSettingLight *drawsettinglight;
+    StatusBar *statusbar;
 
 signals:
 

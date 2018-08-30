@@ -10,20 +10,22 @@ DrawSettingNetWork::~DrawSettingNetWork()
 
 }
 
-void DrawSettingNetWork::drawHomeIcon(QPainter *painter, QRect rect)
+void DrawSettingNetWork::drawHomeIcon(QPainter *painter, QRect rect, QString iconpath)
 {
-
+    painter->drawPixmap(rect,iconpath);
 }
 
-void DrawSettingNetWork::drawBackIcon(QPainter *painter, QRect rect)
+void DrawSettingNetWork::drawBackIcon(QPainter *painter, QRect rect, QString iconpath)
 {
-
+    painter->drawPixmap(rect,iconpath);
 }
 
-void DrawSettingNetWork::drawWifiTitle(QPainter *painter, QRect rect)
+void DrawSettingNetWork::drawWifiTitle(QPainter *painter, QRect rect, QString title)
 {
-
+    painter->drawText(rect,title);
 }
+
+
 
 void DrawSettingNetWork::drawWifiSwitch(QPainter *painter, bool flag, QRect rect)
 {

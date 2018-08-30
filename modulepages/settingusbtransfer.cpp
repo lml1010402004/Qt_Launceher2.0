@@ -10,7 +10,7 @@ extern QList<QMainWindow*> *mainwindowlist;
 
 SettingUSBTransfer::SettingUSBTransfer(QWidget *parent) : QMainWindow(parent)
 {
-     mainwindowlist->append(this);
+    mainwindowlist->append(this);
     this->setWindowFlags(Qt::Dialog|Qt::FramelessWindowHint);
     this->setFixedHeight(GLOBAL_SCREEN_FIXED_HEIGHT);
     this->setFixedWidth(GLOBAL_SCREEN_FIXED_WIDTH);
@@ -35,8 +35,8 @@ void SettingUSBTransfer::mouseMoveEvent(QMouseEvent *event)
 
 void SettingUSBTransfer::mouseReleaseEvent(QMouseEvent *event)
 {
-    settingusb_rectflag[targetwidgetindex] = 0;
     if(targetwidgetindex>-1){
+        settingusb_rectflag[targetwidgetindex] = 0;
         switch (targetwidgetindex) {
         case 0:
             break;
@@ -64,14 +64,14 @@ void SettingUSBTransfer::paintEvent(QPaintEvent *event)
 
 void SettingUSBTransfer::init()
 {
-   statubar = new StatusBar(this);
+    statubar = new StatusBar(this);
     initView();
     initConnections();
 }
 
 void SettingUSBTransfer::initConnections()
 {
- QObject::connect(this,SIGNAL(backToHomePageSignal()),this,SLOT(clickHomeButtonSlot()));
+    QObject::connect(this,SIGNAL(backToHomePageSignal()),this,SLOT(clickHomeButtonSlot()));
 }
 
 void SettingUSBTransfer::initView()
@@ -83,7 +83,7 @@ void SettingUSBTransfer::initView()
 
 void SettingUSBTransfer::clickHomeButtonSlot()
 {
-  commonUtils::backToHomePageSlot();
+    commonUtils::backToHomePageSlot();
 }
 
 

@@ -20,6 +20,9 @@ public:
     void mouseReleaseEvent(QMouseEvent *event);
     void paintEvent(QPaintEvent *event);
 
+
+
+
 private:
     void init();
     void initView();

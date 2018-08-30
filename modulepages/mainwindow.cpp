@@ -4,6 +4,8 @@
 #include"utils/commonutils.h"
 #include<QBrush>
 
+
+
 const int mainpage1[8] = {100,110,150,200,350,110,150,200};
 const int mainpage2[4] ={260,430,80,40};
 const int mainpage3[4] ={40,540,40,40};
@@ -167,9 +169,9 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
         rectflag[targetWidgetIndex] = 1;
         this->repaint(rectlist->at(targetWidgetIndex));
     }
-//    if(event->y()<60){
-//        pulldownwindow->show();
-//    }
+    //    if(event->y()<60){
+    //        pulldownwindow->show();
+    //    }
 
 
 
@@ -184,10 +186,7 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event)
 {
     if(targetWidgetIndex>-1){
         rectflag[targetWidgetIndex] = 0;
-    }
 
-
-    if(targetWidgetIndex>-1){
         switch (targetWidgetIndex) {
         case 0:
             break;
