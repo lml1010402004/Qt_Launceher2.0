@@ -36,6 +36,7 @@ public:
     void setText_width(int text_width);
     void setText_height(int text_height);
     void setText_str(QString str);
+    QString getText_str();
     void setText(int text_x,int text_y,int text_width,int text_height,QString text_str);
 
 

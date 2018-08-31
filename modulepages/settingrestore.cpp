@@ -42,8 +42,9 @@ void SettingRestore::mouseReleaseEvent(QMouseEvent *event)
         default:
             break;
         }
+        this->repaint(rectlist->at(targetwidgetindex));
         targetwidgetindex = -1;
-        this->repaint();
+
     }
 }
 

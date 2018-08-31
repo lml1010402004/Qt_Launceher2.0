@@ -5,6 +5,7 @@
 
 int pulldown_rectflag[5] = {0,0,0,0,0};
 
+
 PullDownWindow::PullDownWindow(QWidget *parent) : QMainWindow(parent)
 {
     this->setWindowFlags(Qt::Dialog|Qt::FramelessWindowHint);
@@ -29,6 +30,10 @@ void PullDownWindow::init()
 void PullDownWindow::initView()
 {
     rectlist = new QList<QRect>;
+
+
+
+
 }
 
 
@@ -61,14 +66,16 @@ void PullDownWindow::mouseReleaseEvent(QMouseEvent *event)
         default:
             break;
         }
+    this->repaint(rectlist->at(targetwidgetindex));
     targetwidgetindex = -1;
-    this->repaint();
+
     }
 }
 
 void PullDownWindow::paintEvent(QPaintEvent *event)
 {
     QPainter *painter = new QPainter(this);
+
 
 }
 

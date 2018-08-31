@@ -125,7 +125,12 @@ this->text_height = text_height;
  */
 void ConditionItem::setText_str(QString str)
 {
-this->text_str = str;
+    this->text_str = str;
+}
+
+QString ConditionItem::getText_str()
+{
+    return text_str;
 }
 
 

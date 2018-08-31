@@ -8,8 +8,8 @@ ThirdApplications::ThirdApplications(QWidget *parent) : QMainWindow(parent)
 {
 
     this->setWindowFlags(Qt::Dialog|Qt::FramelessWindowHint);
-    this->setFixedHeight(SCREEN_FIXED_HEIGHT);
-    this->setFixedWidth(SCREEN_FIXED_WIDTH);
+    this->setFixedHeight(GLOBAL_SCREEN_FIXED_HEIGHT);
+    this->setFixedWidth(GLOBAL_SCREEN_FIXED_WIDTH);
     init();
 }
 
@@ -41,6 +41,7 @@ void ThirdApplications::mousePressEvent(QMouseEvent *event)
 {
     targetwidgetindex = commonUtils::getTheTargetWidget(event->x(),event->y(),rectlist);
     this->repaint();
+    this->close();
 }
 
 void ThirdApplications::mouseMoveEvent(QMouseEvent *event)
@@ -65,8 +66,10 @@ void ThirdApplications::mouseReleaseEvent(QMouseEvent *event)
         default:
             break;
         }
+
+        this->repaint(rectlist->at(targetwidgetindex));
         targetwidgetindex = -1;
-        this->repaint();
+
     }
 }
 

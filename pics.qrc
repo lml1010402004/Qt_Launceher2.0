@@ -57,5 +57,10 @@
         <file>pics/application_pressed.png</file>
         <file>pics/bookshelf_pressed.png</file>
         <file>pics/setting_pressed.png</file>
+        <file>pics/home_unpress.png</file>
+        <file>pics/firstpage_pressed.png</file>
+        <file>pics/firstpage_unpress.png</file>
+        <file>pics/endpage_pressed.png</file>
+        <file>pics/endpage_unpressed.png</file>
     </qresource>
 </RCC>

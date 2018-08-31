@@ -8,8 +8,9 @@
 #include<QList>
 #include"drawpages/drawbookshelf.h"
 #include<dataItem/conditionitem.h>
-#include<database/database.h>
-#include"utils/commonutils.h"
+//#include<database/database.h>
+#include"statusbar.h"
+#include"statusbar_global.h"
 
 class BookShelf : public QMainWindow
 {
@@ -28,11 +29,19 @@ public:
 
 
 private:
-
+    int current_page;
+    int total_pages;
+    int condition_selected_index;
     QRect rect;
+    ConditionItem conditionitem;
     QList<QRect> *rectlist;
     int targetwidgetindex;
+    StatusBar *statusbar;
     DrawBookshelf *drawbookshelf;
+    QList<ConditionItem> *conditonsItemlist;
+    QList<QString> list;
+    QList<localDirectoryItem> *totalbookinfolist;
+    QList<localDirectoryItem> *currentpagebookinfolist;
 
     void init();
     void initView();
@@ -41,7 +50,6 @@ private:
     QList<localDirectoryItem>* getCurrentPageBooklist(QList<localDirectoryItem> *list,int currentpage);
     int getTotalPagesForEachCondition(QList<localDirectoryItem> *list);
     void processFinisheds();
-
 
 signals:
 

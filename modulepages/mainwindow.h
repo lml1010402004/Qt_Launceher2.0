@@ -15,6 +15,8 @@
 #include<QStringList>
 #include"modulepages/settings.h"
 #include"database/database.h"
+#include"modulepages/bookshelf.h"
+#include"modulepages/thirdapplications.h"
 
 
 
@@ -37,6 +39,10 @@ private:
     PullDownWindow *pulldownwindow;
     StatusBar *statusbar;
     Settings *settings;
+    BookShelf *bookshelf;
+    ThirdApplications *thirdapplication;
+
+
 
 
 

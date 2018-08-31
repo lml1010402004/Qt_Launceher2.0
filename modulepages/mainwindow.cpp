@@ -9,13 +9,14 @@
 const int mainpage1[8] = {100,110,150,200,350,110,150,200};
 const int mainpage2[4] ={260,430,80,40};
 const int mainpage3[4] ={40,540,40,40};
-const int mainpage4[12] = {90,480,120,170,240,480,120,170,390,480,120,170};
+const int mainpage4[12] = {90,480,120,150,240,480,120,150,390,480,120,150};
 const int mainpage5[4] = {520,540,40,40};
 const int mainpage6[12] = {70,700,60,60,270,700,60,60,470,700,60,60};
+const int mainpage7[4] = {260,10,80,40};
 
 
 //assign the default value to rect.
-int rectflag[11] = {0,0,0,0,0,0,0,0,0,0,0};
+int rectflag[12] = {0,0,0,0,0,0,0,0,0,0,0,0};
 
 const QString homeiconpath = ":/mypic/pics/homeicon.png";
 
@@ -62,6 +63,8 @@ void MainWindow::init()
     drawmainpage = new DrawMainPage;
     pulldownwindow = new PullDownWindow(this);
     settings = new Settings(this);
+    bookshelf = new BookShelf(this);
+    thirdapplication = new ThirdApplications(this);
 
     statusbar = new StatusBar(this);
     currentbookcoverrect = new QList<QRect>;
@@ -148,6 +151,12 @@ void MainWindow::initView()
     rect.setHeight(mainpage6[11]);
     rectlist->append(rect);//Setting index=10
 
+    rect.setX(mainpage7[0]);
+    rect.setY(mainpage7[1]);
+    rect.setWidth(mainpage7[2]);
+    rect.setHeight(mainpage7[3]);
+    rectlist->append(rect);//pull rectangle index = 11
+
 
     //assign 0 to all widgets.
     for(int i=0;i<rectlist->size();i++){
@@ -169,11 +178,6 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
         rectflag[targetWidgetIndex] = 1;
         this->repaint(rectlist->at(targetWidgetIndex));
     }
-    //    if(event->y()<60){
-    //        pulldownwindow->show();
-    //    }
-
-
 
 }
 
@@ -227,8 +231,17 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event)
 
             break;
         case 8:
+            if(bookshelf==NULL){
+                bookshelf = new BookShelf(this);
+            }
+             bookshelf->show();
             break;
         case 9:
+            if(thirdapplication==NULL){
+                thirdapplication = new ThirdApplications(this);
+
+            }
+            thirdapplication->show();
             break;
         case 10:
             if(settings==NULL){
@@ -236,12 +249,18 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event)
             }
             settings->show();
             break;
+        case 11:
+            if(pulldownwindow==NULL){
+                pulldownwindow = new PullDownWindow(this);
+            }
+            pulldownwindow->show();
+            break;
         default:
             break;
         }
-
+        this->repaint(rectlist->at(targetWidgetIndex));
         targetWidgetIndex = -1;
-        this->repaint();
+
     }
 
 

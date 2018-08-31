@@ -4,21 +4,22 @@
 #include<QString>
 #include"dataItem/conditionitem.h"
 #include"database/database.h"
+#include<QRect>
 
 class DrawBookshelf
 {
 public:
     DrawBookshelf();
     ~DrawBookshelf();
-    void drawHomeButton(QPainter *painter,bool flag);
-    void drawArrangeTextView(QPainter *painter,QString str);
+    void drawHomeButton(QPainter *painter,QRect rect,int flag);
+    void drawArrangeTextView(QPainter *painter,QRect rect,QString str);
     void drawSelectedCondition(QPainter *painter,QList<ConditionItem> *conditionlist,int index);
     void drawNineBooks(QPainter *painter,QList<localDirectoryItem> *booklist);
 
-    void drawTheFirstandLastPageIcon(QPainter *painter,QRect firstrect,QRect lastrect);
-    void drawTheNextandEndPageIcon(QPainter *painter,QRect nextrect,QRect endrect);
+    void drawTheFirstandLastPageIcon(QPainter *painter,QRect firstrect,int firstflag,QRect lastrect,int lastflag);
+    void drawTheNextandEndPageIcon(QPainter *painter,QRect nextrect,int nextflag,QRect endrect,int endflag);
     void drawCurrentPageandTotalPages(QPainter *painter,int currentpage,int totalpages,QRect rect);
-
+    QRect rect;
 
 };
 
