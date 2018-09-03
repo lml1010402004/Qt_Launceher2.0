@@ -17,7 +17,7 @@ const int conditionlist_y = 120;
 const int conditionlist_width = 120;
 const int condition_height= 60;
 
-const int pagesrect[4]={270,740,60,40};
+const int pagesrect[4]={285,740,60,40};
 
 
 int bookshelf_rectflag[5] = {0,0,0,0,0};

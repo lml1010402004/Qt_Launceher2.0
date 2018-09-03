@@ -59,7 +59,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::init()
 {
-    getBookDataFromDataBase();
+
     drawmainpage = new DrawMainPage;
     pulldownwindow = new PullDownWindow(this);
     settings = new Settings(this);
@@ -77,6 +77,8 @@ void MainWindow::init()
     unable_last =0;
     unable_next =0;
     initConnection();
+
+    getBookDataFromDataBase();
 }
 
 
@@ -157,28 +159,16 @@ void MainWindow::initView()
     rect.setHeight(mainpage7[3]);
     rectlist->append(rect);//pull rectangle index = 11
 
-
-    //assign 0 to all widgets.
-    for(int i=0;i<rectlist->size();i++){
-        qDebug()<<"rectflag[i]=="+QString::number(rectflag[i]);
-    }
-
 }
-
-
-
 
 
 void MainWindow::mousePressEvent(QMouseEvent *event)
 {
-
     targetWidgetIndex = commonUtils::getTheTargetWidget(event->x(),event->y(),rectlist);
-
     if(targetWidgetIndex>-1){
         rectflag[targetWidgetIndex] = 1;
-        this->repaint(rectlist->at(targetWidgetIndex));
+        this->repaint();
     }
-
 }
 
 void MainWindow::mouseMoveEvent(QMouseEvent *event)
@@ -199,15 +189,16 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event)
             break;
         case 3:
             if(currentPageOfMainPage>1){
-                unable_next = 0;
-                unable_last = 0;
+
+                endpage = false;
+                firstpage = false;
                 currentPageOfMainPage--;
                 currentPagebooklist = commonUtils::getCurrentPageBooks(totaltemp,currentPageOfMainPage,3);
-
+                qDebug()<<"currentPagebooklist->size()==="<<currentPagebooklist->size();
             }else{
-                unable_next = 0;
-                unable_last =1;
 
+                firstpage = true;
+                endpage = false;
             }
             break;
         case 4:
@@ -218,14 +209,20 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event)
             break;
         case 7:
             if(currentPageOfMainPage<totalPagesOfBooks-1){
-                unable_last = 0;
-                unable_next = 0;
+
                 currentPageOfMainPage++;
+                endpage = false;
+                firstpage = false;
                 currentPagebooklist = commonUtils::getCurrentPageBooks(totaltemp,currentPageOfMainPage,3);
             }else{
                 unable_next = 1;
                 unable_last =0;
-
+                endpage = true;
+                firstpage = false;
+            }
+            threebookrect->clear();
+            for(int i=0;i<currentPagebooklist->size();i++){
+                threebookrect->append(rectlist->at(4+i));//4 is the index of rect in the layout.
             }
 
             break;
@@ -233,7 +230,7 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event)
             if(bookshelf==NULL){
                 bookshelf = new BookShelf(this);
             }
-             bookshelf->show();
+            bookshelf->show();
             break;
         case 9:
             if(thirdapplication==NULL){
@@ -257,12 +254,9 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event)
         default:
             break;
         }
-        this->repaint(rectlist->at(targetWidgetIndex));
+        this->repaint();
         targetWidgetIndex = -1;
-
     }
-
-
 
 }
 
@@ -284,27 +278,18 @@ void MainWindow::paintEvent(QPaintEvent *event)
     currentbookcoverrect->append(rectlist->at(1));
     drawmainpage->drawCurrentBookCover(painter,currentbookcoverlist,currentbookcovertitle,currentbookcoverrect);
     drawmainpage->drawTextView(painter,rectlist->at(2),tr("NewB"));
-    drawmainpage->drawNextPage(painter,rectflag[7],rectlist->at(7));
+    drawmainpage->drawNextPage(painter,rectflag[7],rectlist->at(7),endpage);
 
-    drawmainpage->drawLastPage(painter,rectflag[3],rectlist->at(3));
-    threebookrect->clear();
-    threebookstringlist.clear();
+    drawmainpage->drawLastPage(painter,rectflag[3],rectlist->at(3),firstpage);
 
-    threebookrect->append(rectlist->at(4));
-    threebookrect->append(rectlist->at(5));
-    threebookrect->append(rectlist->at(6));
-    threebookstringlist.append(cover_group[0]);
-    threebookstringlist.append(cover_group[1]);
-    threebookstringlist.append(cover_group[2]);
-    drawmainpage->drawThreeBooksArea(painter,threebookrect,threebookstringlist);
+    for(int i=0;i<currentPagebooklist->size();i++){
+        qDebug()<<"currentPagebooklist..."<<currentPagebooklist->at(i).file_name;
+    }
+    drawmainpage->drawThreeBooksArea(painter,threebookrect,currentPagebooklist);
 
     drawmainpage->drawThreeModulesBottom1(painter,rectflag[8],rectlist->at(8));
     drawmainpage->drawThreeModulesBottom2(painter,rectflag[9],rectlist->at(9));
     drawmainpage->drawThreeModulesBottom3(painter,rectflag[10],rectlist->at(10));
-
-
-
-
 
 }
 
@@ -327,7 +312,25 @@ void MainWindow::getBookDataFromDataBase()
             totalPagesOfBooks = size/3+1;
         }
         currentPageOfMainPage =1;
+        if(totalPagesOfBooks>1){
+            endpage = false;
+            firstpage = true;
+        }else{
+            endpage = true;
+        }
+
+
         currentPagebooklist = commonUtils::getCurrentPageBooks(totaltemp,currentPageOfMainPage,3);
+
+        threebookrect->clear();
+        for(int i=0;i<currentPagebooklist->size();i++){
+            threebookrect->append(rectlist->at(4+i));//4 is the index of rect in the layout.
+        }
+
+        //        qDebug()<<"totaltemp===="<<QString::number(totaltemp);
+        qDebug()<<"currentPageOfMainPage===="<<currentPageOfMainPage;
+        qDebug()<<"currentPagebooklist.size()==="<<currentPagebooklist->size();
+
     }
 
 

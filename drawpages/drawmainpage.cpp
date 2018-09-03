@@ -1,5 +1,7 @@
 #include "drawmainpage.h"
 #include<QDebug>
+#include<QFileInfo>
+#include<QFile>
 
 
 const QString homepressed = ":/mypic/pics/home_pressed.png";
@@ -17,6 +19,9 @@ const QString setting = ":/mypic/pics/setting.png";
 const QString bookshelf_pressed=":/mypic/pics/bookshelf_pressed.png";
 const QString application_pressed=":/mypic/pics/application_pressed.png";
 const QString setting_pressed=":/mypic/pics/setting_pressed.png";
+
+
+//const QString txt_cover = ":/mypic/pics/pdf_cover.png";
 
 
 
@@ -72,22 +77,26 @@ void DrawMainPage::drawCurrentBookProgress(QPainter *painter, int percentage, QR
     painter->drawText(rect,QString::number(percentage));
 }
 
-void DrawMainPage::drawLastPage(QPainter *painter, int index, QRect rect)
+void DrawMainPage::drawLastPage(QPainter *painter, int index, QRect rect,bool firstpage)
 {
-    if(index==0){
-        painter->drawPixmap(rect,lastpageunpressed);
-    }else if(index==1){
-        painter->drawPixmap(rect,lastpagepressed);
+    if(!firstpage){
+        if(index==0){
+            painter->drawPixmap(rect,lastpageunpressed);
+        }else if(index==1){
+            painter->drawPixmap(rect,lastpagepressed);
+        }
     }
 
 }
 
-void DrawMainPage::drawNextPage(QPainter *painter, int index, QRect rect)
+void DrawMainPage::drawNextPage(QPainter *painter, int index, QRect rect,bool endpage)
 {
-    if(index==0){
-        painter->drawPixmap(rect,nextpageunpressed);
-    }else if(index==1){
-        painter->drawPixmap(rect,nextpagepressed);
+    if(!endpage){
+        if(index==0){
+            painter->drawPixmap(rect,nextpageunpressed);
+        }else if(index==1){
+            painter->drawPixmap(rect,nextpagepressed);
+        }
     }
 }
 
@@ -129,8 +138,9 @@ void DrawMainPage::drawThreeModulesBottom3(QPainter *painter, int index, QRect r
 
 }
 
-void DrawMainPage::drawThreeBooksArea(QPainter *painter, QList<QRect> *rectlist, QStringList bookcoverlist)
+void DrawMainPage::drawThreeBooksArea(QPainter *painter, QList<QRect> *rectlist, QList<localDirectoryItem> *booklist)
 {
+
     QRect rect;
     for(int i=0;i<rectlist->size();i++){
         rect.setX(rectlist->at(i).x()-1);
@@ -138,7 +148,17 @@ void DrawMainPage::drawThreeBooksArea(QPainter *painter, QList<QRect> *rectlist,
         rect.setWidth(rectlist->at(i).width()+1);
         rect.setHeight(rectlist->at(i).height()+1);
         painter->drawRect(rect);
-        painter->drawPixmap(rectlist->at(i),bookcoverlist.at(i));
-    }
 
+
+        localDirectoryItem item = booklist->at(i);
+        QString temppath ;
+        QFile *tempFile = new QFile(item.file_path+".jpg");
+        if(tempFile->exists()==false){
+            temppath =":/mypic/pics/bg2.png";
+        }else{
+            temppath = item.file_path+".jpg";
+        }
+        painter->drawPixmap(rect,temppath);
+
+    }
 }

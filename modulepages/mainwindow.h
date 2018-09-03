@@ -55,6 +55,8 @@ private:
     int currentPageOfMainPage ;
     int unable_next;
     int unable_last;
+    bool firstpage;
+    bool endpage;
 
 private:
     void init();

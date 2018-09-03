@@ -80,6 +80,7 @@ void PullDownWindow::mousePressEvent(QMouseEvent *event)
         pulldown_rectflag[targetwidgetindex] = -1;
         this->repaint(rectlist->at(targetwidgetindex));
     }
+    this->close();
 }
 
 void PullDownWindow::mouseMoveEvent(QMouseEvent *event)
