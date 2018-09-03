@@ -52,8 +52,10 @@ private:
     void processFinisheds();
 
 signals:
+    void updateDataSignal();
 
 public slots:
+    void updateDataSlot();
 };
 
 #endif // BOOKSHELF_H

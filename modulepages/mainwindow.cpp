@@ -190,7 +190,6 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event)
 {
     if(targetWidgetIndex>-1){
         rectflag[targetWidgetIndex] = 0;
-
         switch (targetWidgetIndex) {
         case 0:
             break;

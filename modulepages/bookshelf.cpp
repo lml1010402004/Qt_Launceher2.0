@@ -15,7 +15,7 @@ const int arrangetext[4] = {30,120,100,50};
 const int conditionlist_x[4] = {140,260,380,500};
 const int conditionlist_y = 120;
 const int conditionlist_width = 120;
-const int condition_height= 50;
+const int condition_height= 60;
 
 const int pagesrect[4]={270,740,60,40};
 
@@ -36,7 +36,7 @@ BookShelf::BookShelf(QWidget *parent) : QMainWindow(parent)
 
 BookShelf::~BookShelf()
 {
-  delete drawbookshelf,statusbar,conditonsItemlist,totalbookinfolist,currentpagebookinfolist,list,conditionitem;
+    delete drawbookshelf,statusbar,conditonsItemlist,totalbookinfolist,currentpagebookinfolist,list,conditionitem;
     drawbookshelf = NULL;
     statusbar = NULL;
     conditonsItemlist = NULL;
@@ -48,7 +48,7 @@ BookShelf::~BookShelf()
 void BookShelf::init(){
     drawbookshelf = new DrawBookshelf;
     statusbar = new StatusBar(this);
-    condition_selected_index = 0;
+    condition_selected_index = 6;
 
     conditonsItemlist = new QList<ConditionItem>;
     totalbookinfolist = new QList<localDirectoryItem>;
@@ -155,7 +155,7 @@ void BookShelf::initView(){
 }
 
 void BookShelf::initConnection(){
-
+   QObject::connect(this,SIGNAL(updateDataSignal()),this,SLOT(updateDataSlot()));
 }
 
 void BookShelf::paintEvent(QPaintEvent *event)
@@ -170,6 +170,7 @@ void BookShelf::paintEvent(QPaintEvent *event)
     QLineF line(0,100,600,100);
     painter->drawLine(line);
 
+    qDebug()<<"currentpagebooklistinfolist==========="<<currentpagebookinfolist->size();
     drawbookshelf->drawNineBooks(painter,currentpagebookinfolist);
     drawbookshelf->drawCurrentPageandTotalPages(painter,current_page,total_pages,rectlist->at(10));
     drawbookshelf->drawArrangeTextView(painter,rectlist->at(5),tr("Sort"));
@@ -178,46 +179,77 @@ void BookShelf::paintEvent(QPaintEvent *event)
 
     drawbookshelf->drawTheNextandEndPageIcon(painter,rectlist->at(3),bookshelf_rectflag[3],rectlist->at(4),bookshelf_rectflag[4]);
 
-    qDebug()<<"condition_selected_index=="<<condition_selected_index;
     drawbookshelf->drawSelectedCondition(painter,conditonsItemlist,condition_selected_index);
 }
 
 void BookShelf::mousePressEvent(QMouseEvent *event)
 {
+
     targetwidgetindex = commonUtils::getTheTargetWidget(event->x(),event->y(),rectlist);
     if(targetwidgetindex>-1){
         bookshelf_rectflag[targetwidgetindex] = 1;
-        this->repaint(rectlist->at(targetwidgetindex));
+        if(targetwidgetindex>5&&targetwidgetindex<10){
+            condition_selected_index  = targetwidgetindex;
+        }
+        this->repaint();
     }
 }
 
 void BookShelf::mouseReleaseEvent(QMouseEvent *event)
 {
+
     if(targetwidgetindex>-1){
         bookshelf_rectflag[targetwidgetindex] =0;
-        if(targetwidgetindex<10&&targetwidgetindex>5){
-            condition_selected_index = targetwidgetindex;
-        }else{
-            switch (targetwidgetindex){
-            case 0:
-                this->close();
-                break;
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            default:
-                break;
+        switch (targetwidgetindex){
+        case 0:
+            this->close();
+            break;
+        case 1:
+            current_page = 1;
+            emit updateDataSignal();
+
+            break;
+        case 2:
+            if(current_page>1){
+                current_page--;
+                emit updateDataSignal();
             }
-            this->repaint(rectlist->at(targetwidgetindex));
-            targetwidgetindex = -1;
+            break;
+        case 3:
+            if(current_page<total_pages){
+                current_page++;
+                emit updateDataSignal();
+            }
+            break;
+        case 4:
+            current_page = total_pages;
+            emit updateDataSignal();
+            break;
+        case 5:
+            break;
+        case 6:
+            current_page =1;
+            emit updateDataSignal();
+            break;
+        case 7:
+             current_page =1;
+            emit updateDataSignal();
+            break;
+        case 8:
+             current_page =1;
+            emit updateDataSignal();
+            break;
+        case 9:
+             current_page =1;
+            emit updateDataSignal();
+            break;
+
+        default:
+            break;
         }
+        this->repaint();
+        targetwidgetindex = -1;
+
 
     }
 
@@ -262,4 +294,31 @@ void BookShelf::processFinisheds(){
     this->repaint();
     QApplication::setScreenUpdateMode(QApplication::EINK_GC16_LOCAL_MODE);//刷新
     repaint();
+}
+
+void BookShelf::updateDataSlot(){
+   totalbookinfolist->clear();
+   switch (condition_selected_index) {
+   case 6:
+       totalbookinfolist = Database::getInstance()->getAllDataFromTouchedTable();
+       total_pages = getTotalPagesForEachCondition(totalbookinfolist);
+       break;
+   case 7:
+       totalbookinfolist = Database::getInstance()->getAllDataFromTotalBooklistTable("name");
+       total_pages = getTotalPagesForEachCondition(totalbookinfolist);
+       break;
+   case 8:
+       totalbookinfolist = Database::getInstance()->getAllDataFromTotalBooklistTable("xid");
+       total_pages = getTotalPagesForEachCondition(totalbookinfolist);
+       break;
+   case 9:
+       totalbookinfolist = Database::getInstance()->getAllDataFromTotalBooklistTable("author");
+       total_pages = getTotalPagesForEachCondition(totalbookinfolist);
+       break;
+   default:
+       break;
+   }
+    currentpagebookinfolist = commonUtils::getCurrentPageBooks(totalbookinfolist,current_page,9);
+    this->repaint();
+
 }

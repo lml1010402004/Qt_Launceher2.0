@@ -60,7 +60,7 @@ void DrawBookshelf::drawSelectedCondition(QPainter *painter, QList<ConditionItem
       rect.setY(position3[2]);
       rect.setWidth(position3[3]);
       rect.setHeight(position3[4]);
-      if(i==index){
+      if(i==index-6){// because the index of rect is 6
       painter->drawPixmap(rect,circle_pressed);
       }else{
       painter->drawPixmap(rect,circle_unpress);
