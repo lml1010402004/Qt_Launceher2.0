@@ -10,6 +10,7 @@
 #include"statusbar_global.h"
 #include<QList>
 #include"drawpages/drawsettingmodules.h"
+#include<QRect>
 
 class Settings : public QMainWindow
 {
@@ -33,6 +34,7 @@ private:
     int targetwidgetindex;
     DrawSettingModules *drawsettingmodules;
     StatusBar *statusbar;
+    QRect rect;
 
 signals:
 

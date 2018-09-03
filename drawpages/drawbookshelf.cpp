@@ -13,8 +13,8 @@ const QString forwardpath_unpressed = ":/mypic/pics/forward_unpressed.png";
 const QString endpath_pressed = ":/mypic/pics/endpage_pressed.png";
 const QString endpath_unpress = ":/mypic/pics/endpage_unpressed.png";
 
-const QString home_pressed = ":/mypic/pics/home_pressed.png";
-const QString home_unpress = ":/mypic/pics/home_unpress.png";
+ QString home_pressed = ":/mypic/pics/home_pressed.png";
+ QString home_unpress = ":/mypic/pics/home_unpress.png";
 
 const QString circle_pressed = ":/mypic/pics/circlesfilled.png";
 const QString circle_unpress = ":/mypic/pics/circlempty.png";

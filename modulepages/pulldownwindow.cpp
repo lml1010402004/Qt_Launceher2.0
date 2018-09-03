@@ -4,6 +4,7 @@
 
 
 int pulldown_rectflag[5] = {0,0,0,0,0};
+const int pulldownrect[] = {0,0,0,0};
 
 
 PullDownWindow::PullDownWindow(QWidget *parent) : QMainWindow(parent)
@@ -30,6 +31,12 @@ void PullDownWindow::init()
 void PullDownWindow::initView()
 {
     rectlist = new QList<QRect>;
+
+    rect.setX(pulldownrect[0]);
+    rect.setY(pulldownrect[1]);
+    rect.setWidth(pulldownrect[2]);
+    rect.setHeight(pulldownrect[3]);
+    rectlist->append(rect);
 
 
 

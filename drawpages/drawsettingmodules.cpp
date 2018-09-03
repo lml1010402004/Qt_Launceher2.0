@@ -1,5 +1,7 @@
 #include "drawsettingmodules.h"
 
+extern  QString home_pressed;
+extern  QString home_unpress;
 DrawSettingModules::DrawSettingModules()
 {
 
@@ -11,9 +13,13 @@ DrawSettingModules::~DrawSettingModules()
 
 }
 
-void DrawSettingModules::drawHomeIcon(QPainter *painter, QRect rect, QString iconpath)
+void DrawSettingModules::drawHomeIcon(QPainter *painter, QRect rect, int iconpath)
 {
-    painter->drawPixmap(rect,iconpath);
+   if(iconpath==1){
+    painter->drawPixmap(rect,home_pressed);
+   }else{
+    painter->drawPixmap(rect,home_unpress);
+   }
 }
 
 
@@ -38,11 +44,6 @@ void DrawSettingModules::drawSettingItems(QPainter *painter, QList<SystemItems*>
 
 void DrawSettingModules::init()
 {
- initView();
-}
-
-void DrawSettingModules::initView()
-{
-
 
 }
+

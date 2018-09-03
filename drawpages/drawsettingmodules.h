@@ -11,7 +11,7 @@ public:
     DrawSettingModules();
     ~DrawSettingModules();
 
-    void drawHomeIcon(QPainter *painter ,QRect rect,QString iconpath);
+    void drawHomeIcon(QPainter *painter ,QRect rect,int iconpath);
     void drawSystemSettingText(QPainter *painter,QString text,QRect rect);
 
     void drawSettingItems(QPainter *painter,QList<SystemItems*> *itemlist);
@@ -21,7 +21,6 @@ public:
 private:
     QRect rect;
     void init();
-    void initView();
     QFont font;
 
 };
