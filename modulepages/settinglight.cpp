@@ -3,6 +3,7 @@
 #include"application.h"
 
 int settinglight_rectflag[5] = {0,0,0,0,0};
+
 QString iconpath2 = "";
 
 SettingLight::SettingLight(QWidget *parent) : QMainWindow(parent)

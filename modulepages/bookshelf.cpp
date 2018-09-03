@@ -3,6 +3,7 @@
 #include"utils/commonutils.h"
 #include<QApplication>
 
+
 const int bookshelf1[4] = {500,48,48,48};
 const int bookshelf2_x[] = {130,200,360,430};
 const int bookshelf3_y=730;
@@ -183,14 +184,11 @@ void BookShelf::paintEvent(QPaintEvent *event)
 
 void BookShelf::mousePressEvent(QMouseEvent *event)
 {
-
     targetwidgetindex = commonUtils::getTheTargetWidget(event->x(),event->y(),rectlist);
     if(targetwidgetindex>-1){
         bookshelf_rectflag[targetwidgetindex] = 1;
         this->repaint(rectlist->at(targetwidgetindex));
     }
-
-
 }
 
 void BookShelf::mouseReleaseEvent(QMouseEvent *event)
@@ -200,8 +198,7 @@ void BookShelf::mouseReleaseEvent(QMouseEvent *event)
         if(targetwidgetindex<10&&targetwidgetindex>5){
             condition_selected_index = targetwidgetindex;
         }else{
-
-            switch (targetwidgetindex) {
+            switch (targetwidgetindex){
             case 0:
                 this->close();
                 break;
@@ -221,6 +218,7 @@ void BookShelf::mouseReleaseEvent(QMouseEvent *event)
             this->repaint(rectlist->at(targetwidgetindex));
             targetwidgetindex = -1;
         }
+
     }
 
 }

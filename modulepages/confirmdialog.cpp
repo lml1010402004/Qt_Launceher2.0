@@ -6,6 +6,7 @@ int comfirm_rectflag[4]={0,0,0,0};
 ConfirmDialog::ConfirmDialog(QWidget *parent):QDialog(parent)
 {
     this->setWindowFlags(Qt::Dialog|Qt::FramelessWindowHint);
+    init();
 
 }
 
@@ -58,10 +59,10 @@ void ConfirmDialog::init()
     drawconfirmdialog = new DrawConfirmDialog(this);
     rectlist = new QList<QRect>;
     initView();
-
 }
 
 void ConfirmDialog::initView()
 {
+
 
 }
