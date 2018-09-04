@@ -11,7 +11,7 @@ public:
     DrawPulldownWindow();
     ~DrawPulldownWindow();
 
-   void drawCloseIcon(QPainter *painter,QRect rect,int icon_pressed);
+   void drawCloseIcon(QPainter *painter,QRect rect);
    void drawShortcutArea(QPainter *painter,QRect rect);
    void drawGrayArea(QPainter *painter,int al,QRect rect);
    void drawShortcutIcons(QPainter *painter,int pressed_index,QList<QRect> *listrect);

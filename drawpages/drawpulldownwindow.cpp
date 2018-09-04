@@ -1,14 +1,21 @@
 #include "drawpulldownwindow.h"
 
+//const QString rectangle_path=":/mypic/pics/pulldown_close.png";
+const QString minus_unpress=":/mypic/pics/minus_uppress.png";
+const QString minus_press=":/mypic/pics/minus_pressed.png";
+const QString plus_unpress=":/mypic/pics/plus_unpress.png";
+const QString plus_press=":/mypic/pics/plus_pressed.png";
+
 DrawPulldownWindow::DrawPulldownWindow()
 {
 
 }
 
-void DrawPulldownWindow::drawCloseIcon(QPainter *painter, QRect rect, int iconpressed)
+void DrawPulldownWindow::drawCloseIcon(QPainter *painter, QRect rect)
 {
-//    painter->drawPixmap(rect,iconpath);
+    painter->drawRect(rect);
 }
+
 
 void DrawPulldownWindow::drawShortcutArea(QPainter *painter, QRect rect)
 {
@@ -46,19 +53,19 @@ void DrawPulldownWindow::drawLightshortcutandProgressBar(QPainter *painter, QStr
 
 void DrawPulldownWindow::drawLightPlus(QPainter *painter, QRect plusrect, int pressed)
 {
-    if(pressed){
-
+    if(pressed==1){
+        painter->drawPixmap(plusrect,plus_press);
     }else{
-
+        painter->drawPixmap(plusrect,plus_unpress);
     }
 }
 
 void DrawPulldownWindow::drawLightMinus(QPainter *painter, QRect minusrect, int pressed)
 {
-    if(pressed){
-
+    if(pressed==1){
+        painter->drawPixmap(minusrect,minus_press);
     }else{
-
+        painter->drawPixmap(minusrect,minus_unpress);
     }
 
 }

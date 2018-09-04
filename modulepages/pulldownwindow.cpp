@@ -3,9 +3,22 @@
 
 
 
-int pulldown_rectflag[6] = {0,0,0,0,0,0};
-const int pulldownrect[] = {120,60,0,0};
-const int pulldownrect1[] = {};
+int pulldown_rectflag[8] = {0,0,0,0,0,0,0,0};
+const int pulldownrect_x[] = {120,260,400};
+int pulldownrect_y=60;
+const int pulldown_shortcut_w=64;
+const int pulldown_shortcut_h=64;
+
+const int minus_plus_x[] = {90,460};
+const int minux_plus_y = 170;
+const int minux_plus_width= 50;
+const int minux_plus_height= 60;
+
+const int rectangle_x = 280;
+const int rectangle_y = 260;
+const int rectangle_w = 40;
+const int rectangle_h = 28;
+
 
 
 PullDownWindow::PullDownWindow(QWidget *parent) : QMainWindow(parent)
@@ -33,41 +46,54 @@ void PullDownWindow::initView()
 {
     rectlist = new QList<QRect>;
 
-    rect.setX(pulldownrect[0]);
-    rect.setY(pulldownrect[1]);
-    rect.setWidth(pulldownrect[2]);
-    rect.setHeight(pulldownrect[3]);
+    rect.setX(pulldownrect_x[0]);
+    rect.setY(pulldownrect_y);
+    rect.setWidth(pulldown_shortcut_w);
+    rect.setHeight(pulldown_shortcut_h);
     rectlist->append(rect);//wifi shortcut index =0
 
-    rect.setX(pulldownrect[4]);
-    rect.setY(pulldownrect[5]);
-    rect.setWidth(pulldownrect[6]);
-    rect.setHeight(pulldownrect[7]);
-    rectlist->append(rect);//setting shortcut index =1
+    rect.setX(pulldownrect_x[1]);
+    rect.setY(pulldownrect_y);
+    rect.setWidth(pulldown_shortcut_w);
+    rect.setHeight(pulldown_shortcut_h);
+    rectlist->append(rect);//wifi shortcut index =1
 
-    rect.setX(pulldownrect[8]);
-    rect.setY(pulldownrect[9]);
-    rect.setWidth(pulldownrect[10]);
-    rect.setHeight(pulldownrect[11]);
-    rectlist->append(rect);//searching shortcut index=2
+    rect.setX(pulldownrect_x[2]);
+    rect.setY(pulldownrect_y);
+    rect.setWidth(pulldown_shortcut_w);
+    rect.setHeight(pulldown_shortcut_h);
+    rectlist->append(rect);//wifi shortcut index =2
 
-    rect.setX(pulldownrect1[0]);
-    rect.setY(pulldownrect1[1]);
-    rect.setWidth(pulldownrect1[2]);
-    rect.setHeight(pulldownrect1[3]);
-    rectlist->append(rect);//minus shortcut index =3
+    rect.setX(minus_plus_x[0]);
+    rect.setY(minux_plus_y);
+    rect.setWidth(minux_plus_width);
+    rect.setHeight(minux_plus_height);
+    rectlist->append(rect);//minus button index =3
 
-    rect.setX(pulldownrect1[4]);
-    rect.setY(pulldownrect1[5]);
-    rect.setWidth(pulldownrect1[6]);
-    rect.setHeight(pulldownrect1[7]);
-    rectlist->append(rect);//plus shortcut index =4
+    rect.setX(minus_plus_x[1]);
+    rect.setY(minux_plus_y);
+    rect.setWidth(minux_plus_width);
+    rect.setHeight(minux_plus_height);
+    rectlist->append(rect);//plus button index =4
 
-    rect.setX(pulldownrect1[8]);
-    rect.setY(pulldownrect[9]);
-    rect.setWidth(pulldownrect[10]);
-    rect.setHeight(pulldownrect1[11]);
-    rectlist->append(rect);//rectangle icon index =5
+    rect.setX(0);
+    rect.setY(0);
+    rect.setWidth(600);
+    rect.setHeight(300);
+    rectlist->append(rect);// up index =5
+
+    rect.setX(0);
+    rect.setY(300);
+    rect.setWidth(600);
+    rect.setHeight(500);
+    rectlist->append(rect); // donw index =6
+
+    rect.setX(rectangle_x);
+    rect.setY(rectangle_y);
+    rect.setWidth(rectangle_w);
+    rect.setHeight(rectangle_h);
+    rectlist->append(rect);// rectangle close index =7;
+
 
 
 }
@@ -77,10 +103,10 @@ void PullDownWindow::mousePressEvent(QMouseEvent *event)
 {
     targetwidgetindex = commonUtils::getTheTargetWidget(event->x(),event->y(),rectlist);
     if(targetwidgetindex>-1){
-        pulldown_rectflag[targetwidgetindex] = -1;
+        pulldown_rectflag[targetwidgetindex] = 1;
         this->repaint(rectlist->at(targetwidgetindex));
     }
-    this->close();
+
 }
 
 void PullDownWindow::mouseMoveEvent(QMouseEvent *event)
@@ -118,7 +144,12 @@ void PullDownWindow::paintEvent(QPaintEvent *event)
 {
     QPainter *painter = new QPainter(this);
 
-//    drawpulldownwindow->drawCloseIcon(painter,rectlist[5], pulldown_rectflag[targetwidgetindex]);
+
+    drawpulldownwindow->drawGrayArea(painter,100,rectlist->at(6));
+    drawpulldownwindow->drawLightMinus(painter,rectlist->at(3),pulldown_rectflag[3]);
+    drawpulldownwindow->drawLightPlus(painter,rectlist->at(4),pulldown_rectflag[4]);
+    drawpulldownwindow->drawCloseIcon(painter,rectlist->at(7));
+
 
 
 }
